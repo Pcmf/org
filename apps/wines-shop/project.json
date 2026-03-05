@@ -1,0 +1,75 @@
+{
+    "name": "wines-shop",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "application",
+    "prefix": "app",
+    "sourceRoot": "apps/wines-shop/src",
+    "tags": [],
+    "targets": {
+        "build": {
+            "executor": "@angular/build:application",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/wines-shop",
+                "browser": "apps/wines-shop/src/main.ts",
+                "tsConfig": "apps/wines-shop/tsconfig.app.json",
+                "inlineStyleLanguage": "scss",
+                "assets": [
+                    {
+                        "glob": "**/*",
+                        "input": "apps/wines-shop/public"
+                    }
+                ],
+                "styles": ["apps/wines-shop/src/styles.scss"]
+            },
+            "configurations": {
+                "production": {
+                    "budgets": [
+                        {
+                            "type": "initial",
+                            "maximumWarning": "500kb",
+                            "maximumError": "1mb"
+                        },
+                        {
+                            "type": "anyComponentStyle",
+                            "maximumWarning": "4kb",
+                            "maximumError": "8kb"
+                        }
+                    ],
+                    "outputHashing": "all"
+                },
+                "development": {
+                    "optimization": false,
+                    "extractLicenses": false,
+                    "sourceMap": true
+                }
+            },
+            "defaultConfiguration": "production"
+        },
+        "serve": {
+            "continuous": true,
+            "executor": "@angular/build:dev-server",
+            "configurations": {
+                "production": {
+                    "buildTarget": "wines-shop:build:production"
+                },
+                "development": {
+                    "buildTarget": "wines-shop:build:development"
+                }
+            },
+            "defaultConfiguration": "development"
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint"
+        },
+        "serve-static": {
+            "continuous": true,
+            "executor": "@nx/web:file-server",
+            "options": {
+                "buildTarget": "wines-shop:build",
+                "staticFilePath": "dist/apps/wines-shop/browser",
+                "spa": true
+            }
+        }
+    }
+}
