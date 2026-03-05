@@ -20,7 +20,9 @@
             "input": "apps/eshop/public"
           }
         ],
-        "styles": ["apps/eshop/src/styles.scss"]
+        "styles": [
+          "apps/eshop/src/styles.scss"
+        ]
       },
       "configurations": {
         "production": {
