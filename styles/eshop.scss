@@ -5,7 +5,8 @@
 @import './base/configurations.scss';
 
 //Libraries
-
+@import "primeicons/primeicons.css";
+@import "primeflex/primeflex.css";
 //Pages
 @import './apps/shop/pages/home-page.scss';
 @import './apps/shop/pages/products-list-page.scss';
