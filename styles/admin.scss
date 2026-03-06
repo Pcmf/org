@@ -1,0 +1,19 @@
+//Base
+@use './base/colors.scss';
+@use './base/fonts.scss';
+@use './base/mixins.scss';
+@use './base/configurations.scss';
+
+//Libraries
+@use "primeicons/primeicons.css";
+@use "primeflex/primeflex.css";
+//Pages
+// @use './apps/shop/pages/home-page.scss';
+// @use './apps/shop/pages/products-list-page.scss';
+
+//Shared
+// @use './apps/shop/shared/header.scss';
+// @use './apps/shop/shared/footer.scss';
+
+//Libs
+@use './libs/ui/ui.scss';
