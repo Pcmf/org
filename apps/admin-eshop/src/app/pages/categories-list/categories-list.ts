@@ -7,15 +7,10 @@ import { InputTextModule } from 'primeng/inputtext';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 
-// interface Column {
-//     field: string;
-//     header: string;
-// }
-interface Product {
+interface Category {
+  id: string;
   name: string;
-  code: string;
-  category: string;
-  quantity: number;
+  icon: string;
 }
 
 @Component({
@@ -27,33 +22,26 @@ interface Product {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoriesList {
-   orders = [
-    { id: 1001, customer: 'John', total: 120 },
-    { id: 1002, customer: 'Ana', total: 80 },
-    { id: 1003, customer: 'Luis', total: 240 }
-  ];
-  products: Product[] = [
+
+  categories: Category[] = [
     {
-      code: '1234',
-      name: 'Product 1',
-      category: 'cat1',
-      quantity: 12
+      id: '1234',
+      name: 'Category 1',
+      icon: 'pi pi-user',
     },
     {
-      code: '5678',
-      name: 'Product 2',
-      category: 'cat1',
-      quantity: 5
+      id: '5678',
+      name: 'Category 2',
+      icon: 'pi pi-users',
     },
   ];
     cols!: [
-            { field: 'code', header: 'Code' },
+            { field: 'id', header: 'id' },
             { field: 'name', header: 'Name' },
-            { field: 'category', header: 'Category' },
-            { field: 'quantity', header: 'Quantity' }
+            { field: 'icon', header: 'icon' },
         ];
 
-  selectProduct(product: Product) {
-    console.log(product);
+  selectCategory(cat: Category) {
+    console.log(cat);
   }
 }
