@@ -18,7 +18,7 @@
     </div>
     <div class="grid">
       <div class="col-12">
-        <p-table [value]="categories" [tableStyle]="{ 'min-width': '50rem' }">
+        <p-table [value]="categories()" [tableStyle]="{ 'min-width': '50rem' }">
                 <ng-template #header>
                     <tr>
                         <th>Id</th>
@@ -28,9 +28,9 @@
                 </ng-template>
                 <ng-template #body let-category>
                     <tr class="table-row" (click)="selectCategory(category)">
-                        <td>{{ category.id }}</td>
+                        <td>{{ category._id }}</td>
                         <td>{{ category.name }}</td>
-                        <td><span class="{{category.icon}}"></span></td>
+                        <td><span class="{{`pi pi-${category.icon}`}}"></span></td>
                     </tr>
                 </ng-template>
             </p-table>

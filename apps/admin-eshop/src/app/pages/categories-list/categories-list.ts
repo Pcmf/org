@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -6,12 +6,8 @@ import { ButtonModule} from 'primeng/button'
 import { InputTextModule } from 'primeng/inputtext';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
-
-interface Category {
-  id: string;
-  name: string;
-  icon: string;
-}
+import { CategoriesService, Category } from '@org/products'
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'admin-categories-list',
@@ -22,24 +18,10 @@ interface Category {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoriesList {
+  readonly categoriesService = inject(CategoriesService);
+  readonly emptyCategories: Category[] = [];
 
-  categories: Category[] = [
-    {
-      id: '1234',
-      name: 'Category 1',
-      icon: 'pi pi-user',
-    },
-    {
-      id: '5678',
-      name: 'Category 2',
-      icon: 'pi pi-users',
-    },
-  ];
-    cols!: [
-            { field: 'id', header: 'id' },
-            { field: 'name', header: 'Name' },
-            { field: 'icon', header: 'icon' },
-        ];
+  readonly categories = toSignal(this.categoriesService.getCategories(), {initialValue: []});
 
   selectCategory(cat: Category) {
     console.log(cat);
