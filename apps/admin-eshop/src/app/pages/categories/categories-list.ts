@@ -38,14 +38,18 @@ export class CategoriesList {
   readonly categoriesService = inject(CategoriesService);
   readonly messageService = inject(MessageService);
   readonly emptyCategories: Category[] = [];
+  searchKey = signal('');
 
   #categories = toSignal(this.categoriesService.getCategories(), {initialValue: []});
   deletedIds = signal<string[]>([]);
-  categories = computed(() => this.#categories().filter( c => !this.deletedIds().includes(c._id!)))
+  #categories2 = computed(() => this.#categories().filter( c => !this.deletedIds().includes(c._id!)))
+  categories = computed(() =>
+    this.#categories2()
+      .filter(c => c.name.toLocaleLowerCase()
+      .includes(this.searchKey().toLocaleLowerCase())
+    )
+  );
 
-  selectCategory(cat: Category) {
-    console.log(cat);
-  }
 
   delete(category: Category) {
     this.categoriesService.delete(category).subscribe(
@@ -65,7 +69,6 @@ export class CategoriesList {
                 })
       }
     )
-
   }
 
   confirm2(event: Category) {

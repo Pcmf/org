@@ -6,12 +6,14 @@
         <p-toolbar>
                 <ng-template #start>
                     <p-button routerLink="form" icon="pi pi-plus" label="New" class="mr-2" text severity="primary" />
-                    <p-button icon="pi pi-print" class="mr-2" text severity="secondary" />
                 </ng-template>
                 <ng-template #end>
                     <p-iconfield iconPosition="left">
                         <p-inputicon class="pi pi-search" />
-                        <input type="text" pInputText placeholder="Search" />
+                        <input type="text"
+                          (input)="searchKey.set($event.target.value)"
+                          pInputText
+                          placeholder="Search" />
                     </p-iconfield>
                 </ng-template>
           </p-toolbar>
