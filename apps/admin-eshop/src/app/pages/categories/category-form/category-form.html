@@ -15,8 +15,8 @@
     <div class="grid mt-4 mb-6" >
       <div class="col-12">
         <form>
-          <div class="grid">
 
+          <div class="grid">
             <div class="col-4">
               <div class="flex flex-col gap-2">
                 <p-iftalabel>
@@ -24,10 +24,11 @@
                     pInputText
                     id="username"
                     aria-describedby="username-help"
-                    [formField]="categoryForm.name!"
+                    [formField]="categoryForm.name"
                   />
                   <label for="username">Name</label>
               </p-iftalabel>
+
               </div>
             </div>
             <div class="col-4">
@@ -38,7 +39,7 @@
                     pInputText
                     id="icon"
                     aria-describedby="username-help"
-                    [formField]="categoryForm.icon!"
+                    [formField]="categoryForm.icon"
                   />
                 </div>
               </p-iftalabel>

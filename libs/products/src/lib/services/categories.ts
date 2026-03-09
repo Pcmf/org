@@ -14,6 +14,14 @@ export class CategoriesService {
     return this.http.get<Category[]>('http://localhost:3000/api/v1/categories');
   }
 
+  getCategoryVById(id: string): Observable<Category[]> {
+    return this.http.get<Category[]>(`http://localhost:3000/api/v1/categories/${id}`);
+  }
+
+  updateCategory(category: Category): Observable<Category> {
+    return this.http.put<Category>(`http://localhost:3000/api/v1/categories/${category.id}`, category );
+  }
+
   saveCategory(category: Category): Observable<Category> {
     return this.http.post<Category>('http://localhost:3000/api/v1/categories', category);
   }
