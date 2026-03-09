@@ -9,8 +9,9 @@ import { InputIconModule } from 'primeng/inputicon';
 import { CategoriesService, Category } from '@org/products'
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterModule } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @Component({
   selector: 'admin-categories-list',
@@ -24,14 +25,16 @@ import { ToastModule } from 'primeng/toast';
     InputIconModule,
     RouterModule,
     ToastModule,
+    ConfirmDialogModule
   ],
-  providers: [MessageService],
+  providers: [MessageService, ConfirmationService ],
   templateUrl: './categories-list.html',
   styleUrl: './categories-list.scss',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoriesList {
+  readonly confirmationService = inject(ConfirmationService);
   readonly categoriesService = inject(CategoriesService);
   readonly messageService = inject(MessageService);
   readonly emptyCategories: Category[] = [];
@@ -63,6 +66,33 @@ export class CategoriesList {
       }
     )
 
+  }
+
+  confirm2(event: Category) {
+    this.confirmationService.confirm({
+      // target: event.target as EventTarget,
+      message: 'Do you want to delete this category?',
+      header: 'Delete category',
+      icon: 'pi pi-info-circle',
+      rejectLabel: 'Cancel',
+      rejectButtonProps: {
+          label: 'Cancel',
+          severity: 'secondary',
+          outlined: true
+      },
+      acceptButtonProps: {
+          label: 'Delete',
+          severity: 'danger'
+      },
+
+      accept: () => {
+          this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Category deleted' });
+          this.delete(event as Category)
+      },
+      reject: () => {
+          this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have cancel deletion' });
+      }
+    });
   }
 
 }
