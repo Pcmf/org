@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, computed, signal } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -10,10 +10,21 @@ import { CategoriesService, Category } from '@org/products'
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterModule } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'admin-categories-list',
-  imports: [TableModule, CardModule, ToolbarModule, ButtonModule, InputTextModule, IconFieldModule, InputIconModule, RouterModule],
+  imports: [
+    TableModule,
+    CardModule,
+    ToolbarModule,
+    ButtonModule,
+    InputTextModule,
+    IconFieldModule,
+    InputIconModule,
+    RouterModule,
+    ToastModule,
+  ],
   providers: [MessageService],
   templateUrl: './categories-list.html',
   styleUrl: './categories-list.scss',
@@ -25,14 +36,15 @@ export class CategoriesList {
   readonly messageService = inject(MessageService);
   readonly emptyCategories: Category[] = [];
 
-  readonly categories = toSignal(this.categoriesService.getCategories(), {initialValue: []});
+  #categories = toSignal(this.categoriesService.getCategories(), {initialValue: []});
+  deletedIds = signal<string[]>([]);
+  categories = computed(() => this.#categories().filter( c => !this.deletedIds().includes(c._id!)))
 
   selectCategory(cat: Category) {
     console.log(cat);
   }
 
   delete(category: Category) {
-    console.log(category);
     this.categoriesService.delete(category).subscribe(
       {
         next: () => {
@@ -41,7 +53,7 @@ export class CategoriesList {
                   summary: 'Success',
                   detail: 'Category deleted successufuly!'
               });
-            console.log('Delete ', category);
+          this.deletedIds.set([category._id!]);
           },
         error: () => this.messageService.add({
                   severity: 'error',
