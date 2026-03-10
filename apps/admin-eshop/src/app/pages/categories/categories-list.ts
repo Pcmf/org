@@ -38,11 +38,15 @@ export class CategoriesList {
   readonly categoriesService = inject(CategoriesService);
   readonly messageService = inject(MessageService);
   readonly emptyCategories: Category[] = [];
+  //search
   searchKey = signal('');
-
-  #categories = toSignal(this.categoriesService.getCategories(), {initialValue: []});
+  //placeholder for delete ids
   deletedIds = signal<string[]>([]);
+  //get from BE
+  #categories = toSignal(this.categoriesService.getCategories(), {initialValue: []});
+  //remove the deleted category frm list
   #categories2 = computed(() => this.#categories().filter( c => !this.deletedIds().includes(c._id!)))
+  //filter by searchKey
   categories = computed(() =>
     this.#categories2()
       .filter(c => c.name.toLocaleLowerCase()
@@ -89,12 +93,10 @@ export class CategoriesList {
       },
 
       accept: () => {
-          this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Category deleted' });
           this.delete(event as Category)
       },
-      reject: () => {
-          this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have cancel deletion' });
-      }
+      // reject: () => {
+      // }
     });
   }
 

@@ -1,11 +1,12 @@
 import { Route } from '@angular/router';
 import { Shell } from './shared/shell/shell';
 import { Dashboard } from './pages/dashboard/dashboard';
-import { ProductsList } from './pages/products-list/products-list';
+import { ProductsList } from './pages/products/products-list/products-list';
 import { CategoriesList } from './pages/categories/categories-list';
 import { OrdersList } from './pages/orders-list/orders-list';
 import { UsersList } from './pages/users-list/users-list';
 import { CategoryForm } from './pages/categories/category-form/category-form';
+import { ProductForm } from './pages/products/product-form/product-form';
 
 export const appRoutes: Route[] = [
   {
@@ -18,6 +19,14 @@ export const appRoutes: Route[] = [
       {
         path: 'products',
         component: ProductsList
+      },
+      {
+        path: 'products/form',
+        component: ProductForm
+      },
+      {
+        path: 'products/form/:id',
+        component: ProductForm
       },
       {
         path: 'categories',

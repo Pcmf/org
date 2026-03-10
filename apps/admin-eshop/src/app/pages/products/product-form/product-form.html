@@ -1,0 +1,64 @@
+<div class="admin-page">
+  <p-toast/>
+  <p-card header="Products" subheader="New Product">
+    <div class="grid">
+      <p class="col-12">
+        <p-toolbar>
+                <ng-template #start></ng-template>
+                <ng-template #end>
+                    <p-button (click)="submit()" icon="pi pi-save" label="Save" class="mr-2" text severity="primary" />
+                    <p-button (click)="goBack()" label="Cancel" icon="pi pi-arrow-left" class="mr-2" text severity="secondary" />
+                </ng-template>
+          </p-toolbar>
+      </p>
+    </div>
+    <div class="grid mt-4 mb-6" >
+      <div class="col-12">
+        <form [formGroup]="form">
+          <div class="grid">
+            <div class="col-4">
+              <div class="flex flex-col gap-2">
+                <p-iftalabel>
+                  <input
+                    pInputText
+                    id="username"
+                    aria-describedby="username-help"
+                    formControlName="name"
+                  />
+                  <label for="username">Name</label>
+                </p-iftalabel>
+              </div>
+            </div>
+            <div class="col-4">
+              <p-iftalabel>
+                <div class="flex flex-col gap-2">
+                  <label for="price">Price</label>
+                  <input
+                    pInputText
+                    id="price"
+                    aria-describedby="username-help"
+                    formControlName="price"
+                  />
+                </div>
+              </p-iftalabel>
+            </div>
+            <div class="col-4">
+              <p-iftalabel>
+                <div class="flex flex-col gap-2">
+                  <label for="countInStock">In Stock</label>
+                  <input
+                    pInputText
+                    id="countInStock"
+                    aria-describedby="username-help"
+                    formControlName="countInStock"
+                  />
+                </div>
+              </p-iftalabel>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </p-card>
+</div>
+
