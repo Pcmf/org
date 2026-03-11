@@ -16,46 +16,114 @@
       <div class="col-12">
         <form [formGroup]="form">
           <div class="grid">
-            <div class="col-4">
-              <div class="flex flex-col gap-2">
-                <p-iftalabel>
-                  <input
-                    pInputText
-                    id="username"
-                    aria-describedby="username-help"
-                    formControlName="name"
-                  />
-                  <label for="username">Name</label>
-                </p-iftalabel>
-              </div>
-            </div>
-            <div class="col-4">
-              <p-iftalabel>
-                <div class="flex flex-col gap-2">
-                  <label for="price">Price</label>
-                  <input
-                    pInputText
-                    id="price"
-                    aria-describedby="username-help"
-                    formControlName="price"
-                  />
+            <p-inputgroup>
+                <div class="col-6">
+                  <div class="flex flex-col gap-2">
+                    <p-iftalabel>
+                      <input
+                        pInputText
+                        id="username"
+                        aria-describedby="username-help"
+                        formControlName="name"
+                      />
+                      <label for="username">Name</label>
+                    </p-iftalabel>
+
+                  </div>
                 </div>
-              </p-iftalabel>
-            </div>
-            <div class="col-4">
-              <p-iftalabel>
-                <div class="flex flex-col gap-2">
-                  <label for="countInStock">In Stock</label>
-                  <input
-                    pInputText
-                    id="countInStock"
-                    aria-describedby="username-help"
-                    formControlName="countInStock"
-                  />
+                <div class="col-3">
+                  <div class="flex flex-col gap-2">
+                    <p-iftalabel>
+                      <p-inputnumber
+                        inputId="price"
+                        formControlName="price"
+                        mode="currency"
+                        inputId="currency-portugal"
+                        currency="EUR"
+                        locale="pt-PT"
+                      />
+                      <label for="price">Price</label>
+                    </p-iftalabel>
+                  </div>
                 </div>
-              </p-iftalabel>
+                <div class="col-3">
+                  <p-iftalabel>
+                    <div class="flex flex-col gap-2">
+                      <p-inputnumber formControlName="countInStock" mode="decimal" inputId="countInStock" [useGrouping]="false" />
+                      <label for="countInStock">In Stock</label>
+                    </div>
+                  </p-iftalabel>
+                </div>
+              </p-inputgroup>
+              <p-inputgroup>
+                <div class="col-4">
+                    <div class="flex flex-col gap-2">
+                      <p-iftalabel>
+                        <input
+                          pInputText
+                          id="brand"
+                          aria-describedby="brand-help"
+                          formControlName="brand"
+                        />
+                        <label for="brand">Brand</label>
+                      </p-iftalabel>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="flex flex-col gap-2">
+                      <p-iftalabel>
+                        <p-select
+                          formControlName="category"
+                          [options]="categories()"
+                          optionValue="_id"
+                          [checkmark]="true"
+                          optionLabel="name"
+                          [showClear]="true"
+                          placeholder="..."
+                          id="category"
+                           />
+                        <label for="category">Category</label>
+                      </p-iftalabel>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="flex items-center">
+                      <!-- <p-checkbox inputId="isFeatured" formControlName="isFeatured" size="large" /> -->
+                       <p-toggleswitch formControlName="isFeatured" id="isFeatured"/>
+                      <label for="isFeatured" class="ml-2"> Is featured </label>
+                    </div>
+                </div>
+              </p-inputgroup>
+              <p-inputgroup>
+                <div class="col-12">
+                  <div class="flex flex-col gap-2">
+                    <p-floatlabel variant="on">
+                        <textarea pTextarea id="description" formControlName="description" rows="5" cols="120"  style="resize: none" class="h-full"></textarea>
+                        <label for="description">Description</label>
+                    </p-floatlabel>
+                  </div>
+                </div>
+                </p-inputgroup>
+                <p-inputgroup>
+                <div class="col-12">
+                    <p-editor formControlName="richDescription" [invalid]="false" [style]="{ height: '220px'}" />
+                </div>
+              </p-inputgroup>
+              <!-- Image upload -->
+              <p-inputgroup>
+                <div class=" col-12 flex">
+                  <label for="name" pInputText>Main Image<br/>
+                      <input type="file" id="name"  accept="image/*" (change)="onImageUpload($event)">
+                    @if(image) {
+                      <div class="col-2 mt-2 pl-0">
+                        <img [src]="image" alt="uploaded image" style="max-width: 80px;"/>
+                      </div>
+                    }
+                  </label>
+                </div>
+
+              </p-inputgroup>
             </div>
-          </div>
         </form>
       </div>
     </div>

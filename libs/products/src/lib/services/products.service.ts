@@ -14,19 +14,23 @@ export class ProductsService {
     return this.http.get<Product[]>('http://localhost:3000/api/v1/products');
   }
 
-  getById(id: string): Observable<Product[]> {
-    return this.http.get<Product[]>(`http://localhost:3000/api/v1/products/${id}`);
+  getById(id: string): Observable<Product> {
+    return this.http.get<Product>(`http://localhost:3000/api/v1/products/${id}`);
   }
 
-  update(product: Product): Observable<Product> {
-    return this.http.put<Product>(`http://localhost:3000/api/v1/products/${product.id}`, product );
+  create(product: FormData): Observable<Product> {
+    return this.http.post<Product>(`http://localhost:3000/api/v1/products`, product);
+  }
+
+  update(id: string, product: FormData): Observable<Product> {
+    return this.http.put<Product>(`http://localhost:3000/api/v1/products/${id}`, product );
   }
 
   save(product: Product): Observable<Product> {
     return this.http.post<Product>('http://localhost:3000/api/v1/products', product);
   }
 
-  delete(product: Product) {
-    return this.http.delete(`http://localhost:3000/api/v1/products/${product._id}`);
+  delete(id: string) {
+    return this.http.delete(`http://localhost:3000/api/v1/products/${id}`);
   }
 }

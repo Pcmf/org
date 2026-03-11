@@ -22,7 +22,13 @@
     <div class="grid">
       <p-confirmdialog />
       <div class="col-12">
-        <p-table [value]="products()" [tableStyle]="{ 'min-width': '50rem' }">
+        <p-table
+          [value]="products()"
+          [tableStyle]="{ 'min-width': '50rem' }"
+          [paginator]="true"
+          [rows]="5"
+          [showCurrentPageReport]="false"
+        >
                 <ng-template #header>
                     <tr>
                         <th>Id</th>
@@ -45,7 +51,7 @@
                         <td>{{ product.category?.name }}</td>
                         <td>{{ product.dateCreated | date:'dd-M-yyyy' }}</td>
                         <td><button pButton severity="info" [routerLink]="['form', product._id]"><i class="pi pi-pencil" pButtonIcon></i></button></td>
-                        <td><i class="pi pi-trash" style="color: rgb(213, 37, 37)" (click)="confirm2(product)"></i></td>
+                        <td><i class="pi pi-trash" style="color: rgb(213, 37, 37)" (click)="confirm2(product.id)"></i></td>
                       </tr>
                 </ng-template>
             </p-table>

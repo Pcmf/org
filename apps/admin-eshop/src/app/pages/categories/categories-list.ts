@@ -95,7 +95,7 @@ export class CategoriesList {
       accept: () => {
           this.delete(event as Category)
       },
-      // reject: () => {
+      // reject: () => {   //thi is optional
       // }
     });
   }

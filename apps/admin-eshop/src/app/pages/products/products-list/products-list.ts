@@ -57,7 +57,43 @@ export class ProductsList {
 
 
 
-  confirm2(product: Product) {
-    console.log(product);
+  confirm2(id: string) {
+    this.confirmationService.confirm({
+      message: 'Do you realy want to delete this prodct?',
+      header: 'Delete product',
+      icon: 'pi pi-info.circle',
+      rejectButtonProps: {
+        label: 'Cancel',
+        severity: 'secondary',
+        outlined: true
+      },
+      acceptButtonProps: {
+        label: 'Delete',
+        severity: 'danger'
+      },
+      accept: () => {
+        this.delete(id as string);
+      }
+    })
+
   }
+
+  private delete(id: string) {
+    this.productsService.delete(id).subscribe({
+      next: () => {
+        this.deletedIds.update((ids) => [...ids, id]);
+        this.messageService.add({
+          summary: 'Success',
+          detail: 'Product deleted',
+          severity: 'success'
+        })
+      },
+      error: () => this.messageService.add({
+        summary: 'Error',
+        detail: 'Error on deleting product',
+        severity: 'danger'
+      })
+    })
+  }
+
 }
