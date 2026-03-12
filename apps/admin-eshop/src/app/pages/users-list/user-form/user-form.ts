@@ -1,5 +1,5 @@
-import { CommonModule, Location } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, effect, inject, linkedSignal, signal } from '@angular/core';
+import { CommonModule, Location} from '@angular/common';
+import { ChangeDetectionStrategy, Component, effect, inject, linkedSignal, signal, OnInit  } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormField, form, required } from '@angular/forms/signals';
 import { RouterModule, ActivatedRoute } from '@angular/router';
@@ -14,7 +14,13 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { ToggleSwitchModule } from 'primeng/toggleswitch';
 import { ToolbarModule } from 'primeng/toolbar';
+import { PasswordModule } from 'primeng/password';
 import { map, timer } from 'rxjs';
+import { SelectModule } from 'primeng/select';
+import { FormsModule } from '@angular/forms';
+import * as countriesLib from  'i18n-iso-countries';
+import enLocale from 'i18n-iso-countries/langs/en.json';
+
 
 @Component({
   selector: 'admin-user-form',
@@ -31,18 +37,23 @@ import { map, timer } from 'rxjs';
         ToastModule,
         CommonModule,
         ToggleSwitchModule,
-    ],
-    providers: [MessageService],
+        PasswordModule,
+        SelectModule,
+        FormsModule,
+  ],
+  providers: [MessageService],
   templateUrl: './user-form.html',
   styleUrl: './user-form.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true
 })
-export class UserForm {
+export class UserForm implements OnInit {
     private readonly location = inject(Location);
     private readonly usersService = inject(UsersService);
     private readonly messageService = inject(MessageService);
     private readonly route = inject(ActivatedRoute);
 
+    countries: {id: string, name: string}[] = [];
     userModel = signal<User>({
         id: '',
         name: '',
@@ -77,6 +88,10 @@ export class UserForm {
                 this.loadUserById(id);
             }
         });
+    }
+
+    ngOnInit() {
+      this._getCountries();
     }
 
     loadUserById(id: string) {
@@ -128,6 +143,11 @@ export class UserForm {
         }
     }
 
+    private _getCountries() {
+      countriesLib.registerLocale(enLocale);
+      this.countries = Object.entries(countriesLib.getNames('en', {select: 'official'}))
+        .map(el => ({id: el[0], name: el[1]}));
+    }
     private clearForm() {
       this.userForm().reset()
     }

@@ -37,6 +37,7 @@
                   <input
                     pInputText
                     id="email"
+                    type="email"
                     aria-describedby="email-help"
                     [formField]="userForm.email"
                   />
@@ -47,8 +48,10 @@
               <p-iftalabel>
                 <div class="flex flex-col gap-2">
                   <label for="password">Password</label>
+                  <!-- <p-password [formField]="userForm.password" [toggleMask]="true"/>  not working-->
                   <input
                     pInputText
+                    type="password"
                     id="password"
                     aria-describedby="password-help"
                     [formField]="userForm.password"
@@ -59,7 +62,7 @@
             <div class="col-12">
               <div class="col-4">
                   <div class="flex items-center">
-                    <p-toggleswitch [formField]="userForm.isAdmin" id="isAdmin"/>
+                    <p-toggleswitch [formField]="userForm.isAdmin" inputId="isAdmin"/>
                     <label for="isAdmin" class="ml-2"> Is Admin </label>
                   </div>
               </div>
@@ -132,18 +135,28 @@
               </p-iftalabel>
               </div>
             </div>
-            <div class="col-4">
-              <p-iftalabel>
+            <div class="col-3">
                 <div class="flex flex-col gap-2">
-                  <label for="country">Country</label>
-                  <input
-                    pInputText
-                    id="country"
-                    aria-describedby="country-help"
-                    [formField]="userForm.country"
-                  />
+                  <p-iftalabel class="w-full">
+
+                  <p-select
+                      [ngModel]="userForm.country"
+                      [ngModelOptions]="{standalone: true}"
+                      (onChange)="userForm.country().value.set($event.value)"
+                      [options]="countries"
+                      optionLabel="name"
+                      optionValue="id"
+                      [checkmark]="true"
+                      placeholder="..."
+                      inputId="countryLabel"
+                      [filter]="true" 
+                      filterBy="name"
+                      class="w-full" 
+                  ></p-select>
+
+                  <label for="countryLabel">Country</label>
+                  </p-iftalabel>
                 </div>
-              </p-iftalabel>
             </div>
           </div>
         </form>

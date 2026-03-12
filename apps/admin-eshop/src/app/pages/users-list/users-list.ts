@@ -12,6 +12,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
+import * as countriesLib from  'i18n-iso-countries';
+import enLocale from 'i18n-iso-countries/langs/en.json';
 
 @Component({
   selector: 'admin-users-list',
@@ -53,6 +55,14 @@ export class UsersList {
     )
   );
 
+  constructor() {
+    countriesLib.registerLocale(enLocale);
+  }
+
+
+  getCountry(countryKey: string): string {
+      return countriesLib.getName(countryKey, 'en')!;
+  }
 
   delete(id: string) {
     this.usersService.delete(id).subscribe(
