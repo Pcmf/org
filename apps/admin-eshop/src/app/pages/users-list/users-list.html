@@ -1,1 +1,62 @@
-<p>users-list works!</p>
+<div class="admin-page">
+  <p-toast/>
+  <p-card header="Users" subheader="List of users">
+    <div class="grid">
+      <p class="col-12">
+        <p-toolbar>
+                <ng-template #start>
+                    <p-button routerLink="form" icon="pi pi-plus" label="New" class="mr-2" text severity="primary" />
+                </ng-template>
+                <ng-template #end>
+                    <p-iconfield iconPosition="left">
+                        <p-inputicon class="pi pi-search" />
+                        <input type="text"
+                          (input)="searchKey.set($event.target.value)"
+                          pInputText
+                          placeholder="Search" />
+                    </p-iconfield>
+                </ng-template>
+          </p-toolbar>
+      </p>
+    </div>
+    <div class="grid">
+      <p-confirmdialog />
+      <div class="col-12">
+        <p-table
+          [value]="users()"
+          [tableStyle]="{ 'min-width': '50rem' }"
+          [paginator]="true"
+          [rows]="5"
+          [showCurrentPageReport]="false"
+        >
+                <ng-template #header>
+                    <tr>
+                        <th>Id</th>
+                        <th pSortableColumn="name">Name</th>
+                        <th>email</th>
+                        <th>Is Admin</th>
+                        <th colspan="2">Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template #body let-user>
+                    <tr class="table-row">
+                        <td>{{ user._id }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                          @if(user.isAdmin) {
+                            <i class="pi pi-check"></i>
+                          } @else {
+                            <i class="pi pi-times"></i>
+                          }
+                        </td>
+                        <td><button pButton severity="info" [routerLink]="['form', user._id]"><i class="pi pi-pencil" pButtonIcon></i></button></td>
+                        <td><i class="pi pi-trash" style="color: rgb(213, 37, 37)" (click)="confirm2(user.id)"></i></td>
+                      </tr>
+                </ng-template>
+            </p-table>
+      </div>
+    </div>
+  </p-card>
+</div>
+

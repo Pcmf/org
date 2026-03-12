@@ -7,7 +7,7 @@ import { Product } from '../models/product';
   providedIn: 'root',
 })
 export class ProductsService {
-  readonly http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
 
   getAll(): Observable<Product[]> {

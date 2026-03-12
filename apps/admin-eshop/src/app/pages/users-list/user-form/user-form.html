@@ -1,0 +1,154 @@
+<div class="admin-page">
+  <p-toast/>
+  <p-card header="User" subheader="New user">
+    <div class="grid">
+      <p class="col-12">
+        <p-toolbar>
+                <ng-template #start></ng-template>
+                <ng-template #end>
+                    <p-button (click)="submit()" [disabled]="userForm().invalid() && !isEditing()" icon="pi pi-save" label="Save" class="mr-2" text severity="primary" />
+                    <p-button (click)="goBack()" label="Cancel" icon="pi pi-arrow-left" class="mr-2" text severity="secondary" />
+                </ng-template>
+
+          </p-toolbar>
+      </p>
+    </div>
+    <div class="grid mt-4 mb-6" >
+      <div class="col-12">
+        <form>
+          <div class="grid">
+            <div class="col-4">
+              <div class="flex flex-col gap-2">
+                <p-iftalabel>
+                  <input
+                    pInputText
+                    id="username"
+                    aria-describedby="username-help"
+                    [formField]="userForm.name"
+                  />
+                  <label for="username">Name</label>
+              </p-iftalabel>
+              </div>
+            </div>
+            <div class="col-4">
+              <p-iftalabel>
+                <div class="flex flex-col gap-2">
+                  <label for="email">Email</label>
+                  <input
+                    pInputText
+                    id="email"
+                    aria-describedby="email-help"
+                    [formField]="userForm.email"
+                  />
+                </div>
+              </p-iftalabel>
+            </div>
+            <div class="col-4">
+              <p-iftalabel>
+                <div class="flex flex-col gap-2">
+                  <label for="password">Password</label>
+                  <input
+                    pInputText
+                    id="password"
+                    aria-describedby="password-help"
+                    [formField]="userForm.password"
+                  />
+                </div>
+              </p-iftalabel>
+            </div>
+            <div class="col-12">
+              <div class="col-4">
+                  <div class="flex items-center">
+                    <p-toggleswitch [formField]="userForm.isAdmin" id="isAdmin"/>
+                    <label for="isAdmin" class="ml-2"> Is Admin </label>
+                  </div>
+              </div>
+            </div>
+
+
+            <div class="col-4">
+              <div class="flex flex-col gap-2">
+                <p-iftalabel>
+                  <input
+                    pInputText
+                    id="phone"
+                    aria-describedby="phone-help"
+                    [formField]="userForm.phone"
+                  />
+                  <label for="phone">Phone</label>
+              </p-iftalabel>
+              </div>
+            </div>
+            <div class="col-4">
+              <p-iftalabel>
+                <div class="flex flex-col gap-2">
+                  <label for="apartment">Apartment</label>
+                  <input
+                    pInputText
+                    id="apartment"
+                    aria-describedby="apartment-help"
+                    [formField]="userForm.apartment"
+                  />
+                </div>
+              </p-iftalabel>
+            </div>
+            <div class="col-4">
+              <div class="flex flex-col gap-2">
+                <p-iftalabel>
+                  <input
+                    pInputText
+                    id="street"
+                    aria-describedby="street-help"
+                    [formField]="userForm.street"
+                  />
+                  <label for="street">Street</label>
+              </p-iftalabel>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <p-iftalabel>
+                <div class="flex flex-col gap-2">
+                  <label for="zip">Zip</label>
+                  <input
+                    pInputText
+                    id="zip"
+                    aria-describedby="zip-help"
+                    [formField]="userForm.zip"
+                  />
+                </div>
+              </p-iftalabel>
+            </div>
+            <div class="col-4">
+              <div class="flex flex-col gap-2">
+                <p-iftalabel>
+                  <input
+                    pInputText
+                    id="city"
+                    aria-describedby="city-help"
+                    [formField]="userForm.city"
+                  />
+                  <label for="city">City</label>
+              </p-iftalabel>
+              </div>
+            </div>
+            <div class="col-4">
+              <p-iftalabel>
+                <div class="flex flex-col gap-2">
+                  <label for="country">Country</label>
+                  <input
+                    pInputText
+                    id="country"
+                    aria-describedby="country-help"
+                    [formField]="userForm.country"
+                  />
+                </div>
+              </p-iftalabel>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </p-card>
+</div>
+

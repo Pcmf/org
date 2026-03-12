@@ -7,6 +7,7 @@ import { OrdersList } from './pages/orders-list/orders-list';
 import { UsersList } from './pages/users-list/users-list';
 import { CategoryForm } from './pages/categories/category-form/category-form';
 import { ProductForm } from './pages/products/product-form/product-form';
+import { UserForm } from './pages/users-list/user-form/user-form';
 
 export const appRoutes: Route[] = [
   {
@@ -42,9 +43,17 @@ export const appRoutes: Route[] = [
         path: 'orders',
         component: OrdersList
       },
-            {
+      {
         path: 'users',
         component: UsersList
+      },
+      {
+        path: 'users/form',
+        component: UserForm
+      },
+      {
+        path: 'users/form/:id',
+        component: UserForm
       },
       {
         path: 'logout',
