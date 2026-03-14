@@ -69,13 +69,17 @@ export class ProductForm implements OnInit {
       effect(() => {
         const id = this.productId();
         if(id) {
-          this.getProductById(id);
+          //using resolvers on route
+          const product = this.route.snapshot.data['product'];
+          this.loadForm(product)
+          // this.getProductById(id);
         }
       })
     }
 
     ngOnInit() {
         this._initForm();
+        
     }
 
     submit() {
@@ -102,12 +106,12 @@ export class ProductForm implements OnInit {
       this.form.get('image')?.updateValueAndValidity();
     }
 
-    private getProductById(id: string) {
-      this.productService.getById(id).subscribe({
-        next: (product: Product) => this.loadForm(product),
-        error: () => console.log('Erro on loading product')
-      })
-    }
+    // private getProductById(id: string) {
+    //   this.productService.getById(id).subscribe({
+    //     next: (product: Product) => this.loadForm(product),
+    //     error: () => console.log('Erro on loading product')
+    //   })
+    // }
 
     private _initForm() {
       this.form = this.formBuilder.group({

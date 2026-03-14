@@ -1,17 +1,18 @@
 import { OrderItem } from "./order-item";
+import { User } from '@org/products';
 
 export interface Order {
   id: string;
   _id: string;
   orderItems: OrderItem[];
-  shippinigAdress1: string;
-  shippinigAdress2: string;
+  shippingAddress1: string;
+  shippingAddress2: string;
   city: string;
   zip: string;
   country: string;
   phone: string;
   status: string;
-  user: string;
+  user: User;
   totalPrice: number;
-  dateOredered: Date;
+  dateOrdered: Date;
 }

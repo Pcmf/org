@@ -1,1 +1,50 @@
-<p>orders-list works!</p>
+<div class="admin-page">
+  <p-toast/>
+  <p-card header="Orders" subheader="List of orders">
+    <div class="grid">
+      <p class="col-12">
+        <p-toolbar>
+            <ng-template #start></ng-template>
+            <ng-template #end>
+                    <p-iconfield iconPosition="left">
+                        <p-inputicon class="pi pi-search" />
+                        <input type="text"
+                          (input)="searchKey.set($event.target.value)"
+                          pInputText
+                          placeholder="Search" />
+                    </p-iconfield>
+                </ng-template>
+        </p-toolbar>
+      </p>
+    </div>
+    <div class="grid">
+      <p-confirmdialog />
+      <div class="col-12">
+        <p-table [value]="orders()" [tableStyle]="{ 'min-width': '50rem' }">
+                <ng-template #header>
+                    <tr>
+                        <th pSortableColumn="user.name">User <p-sortIcon field="user.name"></p-sortIcon></th>
+                        <th pSortableColumn="totalPrice">Total Price <p-sortIcon field="totalPrice"></p-sortIcon></th>
+                        <th pSortableColumn="dateOrdered">Date Ordered <p-sortIcon field="dateOrdered"></p-sortIcon></th>
+                        <th>Status</th>
+                        <th colspan="2">Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template #body let-order>
+                    <tr class="table-row">
+                        <td>{{ order.user.name }}</td>
+                        <td>{{ order.totalPrice}}</td>
+                        <td>{{ order.dateOrdered | date: 'dd-M-yyyy hh:mm'}}</td>
+                        <td>
+                          <p-tag [severity]="orderStatus[order.status].color" [value]="orderStatus[order.status].label" />
+                        </td>
+                        <td><button pButton severity="info" [routerLink]="['./', order._id]"><i class="pi pi-eye" pButtonIcon></i></button></td>
+                        <!-- <td><i class="pi pi-trash" style="color: rgb(213, 37, 37)" (click)="confirm2(order)"></i></td> -->
+                      </tr>
+                </ng-template>
+            </p-table>
+      </div>
+    </div>
+  </p-card>
+</div>
+

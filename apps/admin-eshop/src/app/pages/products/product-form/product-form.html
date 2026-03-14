@@ -38,7 +38,6 @@
                         inputId="price"
                         formControlName="price"
                         mode="currency"
-                        inputId="currency-portugal"
                         currency="EUR"
                         locale="pt-PT"
                       />
@@ -73,6 +72,7 @@
                     <div class="flex flex-col gap-2">
                       <p-iftalabel>
                         <p-select
+                          inputId="category"
                           formControlName="category"
                           [options]="categories()"
                           optionValue="_id"
@@ -80,7 +80,6 @@
                           optionLabel="name"
                           [showClear]="true"
                           placeholder="..."
-                          id="category"
                            />
                         <label for="category">Category</label>
                       </p-iftalabel>
@@ -89,7 +88,7 @@
                 <div class="col-4">
                     <div class="flex items-center">
                       <!-- <p-checkbox inputId="isFeatured" formControlName="isFeatured" size="large" /> -->
-                       <p-toggleswitch formControlName="isFeatured" id="isFeatured"/>
+                       <p-toggleswitch formControlName="isFeatured" inputId="isFeatured"/>
                       <label for="isFeatured" class="ml-2"> Is featured </label>
                     </div>
                 </div>

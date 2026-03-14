@@ -22,5 +22,9 @@ export class OrdersService {
     return this.http.get<Order[]>(`http://localhost:3000/api/v1/orders/userorders/${userId}`);
   }
 
+  update(id: string, order: Order): Observable<Order> {
+    return this.http.put<Order>(`http://localhost:3000/api/v1/orders/${id}`, order);
+  }
+
   
 }
