@@ -8,25 +8,33 @@
         <h3>Welcome</h3>
         <h2>Login page</h2>
         <div class="grid">
-          <div class="col-12 mb-0">
-            <p-inputgroup class="p-4 pb-0 mt-6">
-                <p-inputgroup-addon>
-                    <i class="pi pi-user"></i>
-                </p-inputgroup-addon>
-                <input pInputText  placeholder="Email" />
-            </p-inputgroup>
-          </div>
-          <div class="col-12 mt-0">
-            <p-inputgroup class="p-4 pt-0">
-                <p-inputgroup-addon>
-                    <i class="pi pi-eye-slash"></i>
-                </p-inputgroup-addon>
-                <input pInputText type="password"  placeholder="Password" />
-            </p-inputgroup>
-          </div>
-          <div class="col-12 p-4 pt-0">
-            <p-button label="Submit" styleClass="full-btn"/>
-          </div>
+          <form [formGroup]="form" (submit)="onSubmit()">
+            <div class="col-12 mb-0">
+              <p-inputgroup class="p-4 pb-0 mt-6">
+                  <p-inputgroup-addon>
+                      <i class="pi pi-user"></i>
+                  </p-inputgroup-addon>
+                  <input pInputText  placeholder="Email" formControlName="email" />
+              </p-inputgroup>
+              @if(loginForm['email'].invalid && loginForm['email'].touched){
+                <small style="color: red; margin-left: 20px;">Error on email</small>
+              }
+            </div>
+            <div class="col-12 mt-0">
+              <p-inputgroup class="p-4 pb-0 pt-0">
+                  <p-inputgroup-addon>
+                      <i class="pi pi-eye-slash"></i>
+                  </p-inputgroup-addon>
+                  <input pInputText type="password"  placeholder="Password" formControlName="password" />
+              </p-inputgroup>
+              @if(loginForm['password'].invalid && loginForm['password'].touched){
+                    <small style="color: red; margin-left: 20px;">Error on password</small>
+              }
+            </div>
+            <div class="col-12 p-4 pt-2">
+              <p-button label="Submit" styleClass="full-btn" type="Submit" [disabled]="form.invalid"/>
+            </div>
+          </form>
         </div>
       </div>
     </div>
