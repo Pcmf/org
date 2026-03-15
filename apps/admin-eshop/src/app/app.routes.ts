@@ -11,11 +11,12 @@ import { UserForm } from './pages/users-list/user-form/user-form';
 import { OrderDetails } from './pages/orders/order-details/order-details';
 import  { productResolver } from '@org/products';
 import  { orderResolver } from '@org/orders';
-import { Login } from '@org/users';
+import { AuthGuard, Login } from '@org/users';
 
 export const appRoutes: Route[] = [
   {
     path: '',  component: Shell,
+    canActivate: [AuthGuard],
     children: [
 
       {

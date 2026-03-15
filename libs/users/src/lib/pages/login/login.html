@@ -8,7 +8,7 @@
         <h3>Welcome</h3>
         <h2>Login page</h2>
         <div class="grid">
-          <form [formGroup]="form" (submit)="onSubmit()">
+          <form [formGroup]="form" (submit)="onSubmit($event)">
             <div class="col-12 mb-0">
               <p-inputgroup class="p-4 pb-0 mt-6">
                   <p-inputgroup-addon>
@@ -35,6 +35,12 @@
               <p-button label="Submit" styleClass="full-btn" type="Submit" [disabled]="form.invalid"/>
             </div>
           </form>
+          @if(isSubmiting && errorLogin) {
+            <div class="col-12 p-4 pt-0">
+              <small>{{errorMessage}}</small>
+            </div>
+
+          }
         </div>
       </div>
     </div>
