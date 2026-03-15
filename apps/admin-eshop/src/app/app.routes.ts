@@ -9,13 +9,15 @@ import { CategoryForm } from './pages/categories/category-form/category-form';
 import { ProductForm } from './pages/products/product-form/product-form';
 import { UserForm } from './pages/users-list/user-form/user-form';
 import { OrderDetails } from './pages/orders/order-details/order-details';
-import  { productResolver } from '@org/products'; 
-import  { orderResolver } from '@org/orders'; 
+import  { productResolver } from '@org/products';
+import  { orderResolver } from '@org/orders';
+import { Login } from '@org/users';
 
 export const appRoutes: Route[] = [
   {
     path: '',  component: Shell,
     children: [
+
       {
         path: 'dashboard',
         component: Dashboard
@@ -77,5 +79,9 @@ export const appRoutes: Route[] = [
         component: Dashboard  //just for tests
       }
     ]
-  }
+  },
+  {
+    path: 'login',
+    component: Login
+  },
 ];

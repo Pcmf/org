@@ -6,7 +6,7 @@
 
 //Libraries
 @use 'primeicons/primeicons.css';
-@use "primeflex/primeflex.css";
+@use 'primeflex/primeflex.css';
 
 //admin
 @use './apps/admin/shell.scss';
@@ -14,3 +14,4 @@
 
 //Libs
 @use './libs/ui/ui.scss';
+@use './libs/users/users.scss';
