@@ -16,6 +16,10 @@ export class UsersService {
     return this.http.get<User>(`http://localhost:3000/api/v1/users/${id}`);
   }
 
+  usersCount(): Observable<{count: number}> {
+    return this.http.get<{count: number}>(`http://localhost:3000/api/v1/users/get/count`);
+  }
+
   update(user: User): Observable<User> {
     return this.http.put<User>(`http://localhost:3000/api/v1/users/${user.id}`, user);
   }

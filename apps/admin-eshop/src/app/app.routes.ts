@@ -18,9 +18,8 @@ export const appRoutes: Route[] = [
     path: '',  component: Shell,
     canActivate: [AuthGuard],
     children: [
-
       {
-        path: 'dashboard',
+        path: '',
         component: Dashboard
       },
       {

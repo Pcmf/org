@@ -33,4 +33,8 @@ export class ProductsService {
   delete(id: string) {
     return this.http.delete(`http://localhost:3000/api/v1/products/${id}`);
   }
+
+  getCount(): Observable<{count: number}> {
+    return this.http.get<{count: number}>(`http://localhost:3000/api/v1/products/get/count`);
+  }
 }
