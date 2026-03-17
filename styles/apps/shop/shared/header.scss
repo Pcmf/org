@@ -1,0 +1,29 @@
+@use '../../../base/colors' as eshop;
+
+header {
+    .logo {
+        img {
+            width: 120px;
+        }
+        width: 120px;
+    }
+
+    .search {
+        padding-top: 25px;
+    }
+
+    .navigation {
+        padding-top: 23px;
+    }
+
+    .tools {
+        padding-top: 38px;
+        .pi {
+            margin-right: 15px;
+            cursor: pointer;
+            &:hover {
+                color: eshop.$primary-color;
+            }
+        }
+    }
+}

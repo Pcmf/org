@@ -19,7 +19,8 @@
             "@org/products": ["libs/products/src/index.ts"],
             "@org/users": ["libs/users/src/index.ts"],
             "@org/auth": ["libs/auth/src/index.ts"],
-            "@org/orders": ["libs/orders/src/index.ts"]
+            "@org/orders": ["libs/orders/src/index.ts"],
+            "@org/shop": ["styles/eshop.scss"]
         }
     },
     "exclude": ["node_modules", "tmp"]

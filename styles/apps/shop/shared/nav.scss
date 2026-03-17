@@ -1,0 +1,17 @@
+@use '../../../base/colors' as eshop;
+.nav {
+  li {
+    list-style: none;
+    display: inline-block;
+    margin-right: 15px;
+
+    a {
+      color: var(--p-surface-500);
+      cursor: pointer;
+      &:hover {
+        color: eshop.$primary-color;
+      }
+
+    }
+  }
+}

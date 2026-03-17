@@ -1,19 +1,31 @@
 //Base
-@import './base/colors.scss';
-@import './base/fonts.scss';
-@import './base/mixins.scss';
-@import './base/configurations.scss';
+@forward './base/colors';
+@forward './base/fonts';
+@forward './base/mixins';
+
 
 //Libraries
-@import "primeicons/primeicons.css";
-@import "primeflex/primeflex.css";
+@forward "primeicons/primeicons.css";
+@forward "primeflex/primeflex.css";
+
+@forward './base/configurations';
 //Pages
-@import './apps/shop/pages/home-page.scss';
-@import './apps/shop/pages/products-list-page.scss';
+@forward './apps/shop/pages/home-page';
+@forward './apps/shop/pages/products-list-page';
 
 //Shared
-@import './apps/shop/shared/header.scss';
-@import './apps/shop/shared/footer.scss';
+@forward './apps/shop/shared/header';
+@forward './apps/shop/shared/footer';
+@forward './apps/shop/shared/nav';
 
 //Libs
-@import './libs/ui/ui.scss';
+@forward './libs/ui/ui';
+
+
+.container {
+  width: 1200px;
+  padding: 15px;
+  margin: 0 auto;
+  background-color: var(--p-surface-100);
+  // color: colors.$primary-color;
+}
