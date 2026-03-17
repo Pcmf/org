@@ -20,7 +20,8 @@
             "@org/users": ["libs/users/src/index.ts"],
             "@org/auth": ["libs/auth/src/index.ts"],
             "@org/orders": ["libs/orders/src/index.ts"],
-            "@org/shop": ["styles/eshop.scss"]
+            "@org/shop": ["styles/eshop.scss"],
+            "@org/productsStyles": ["styles/products.scss"]
         }
     },
     "exclude": ["node_modules", "tmp"]

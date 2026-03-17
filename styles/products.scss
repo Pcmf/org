@@ -1,0 +1,15 @@
+//Base
+@forward './base/colors.scss';
+@forward './base/fonts.scss';
+@forward './base/mixins.scss';
+@forward './base/configurations.scss';
+
+//Libraries
+@forward 'primeicons/primeicons.css';
+@forward 'primeflex/primeflex.css';
+
+
+//share
+@forward './libs/products/products-search.scss';
+@forward './libs/products/products-category-banner.scss';
+
