@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
-import { AccordionModule } from 'primeng/accordion';
+import { Banner } from '@org/ui';
+import { ProductList } from "../product-list/product-list";
+import { CategoriesBanner } from '@org/products';
+
 @Component({
   selector: 'app-home-page',
-  imports: [ButtonModule, AccordionModule],
+  imports: [Banner, CategoriesBanner, ProductList],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',
 })

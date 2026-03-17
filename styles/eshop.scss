@@ -9,17 +9,16 @@
 @forward "primeflex/primeflex.css";
 
 @forward './base/configurations';
-//Pages
-@forward './apps/shop/pages/home-page';
-@forward './apps/shop/pages/products-list-page';
+
 
 //Shared
-@forward './apps/shop/shared/header';
-@forward './apps/shop/shared/footer';
-@forward './apps/shop/shared/nav';
+@forward './apps/shop/header';
+@forward './apps/shop/footer';
+@forward './apps/shop/nav';
 
 //Libs
 @forward './libs/ui/ui';
+@forward '../node_modules/animate.css/animate.css';
 
 
 .container {

@@ -1,0 +1,38 @@
+.banner {
+  height: 280px;
+  width: 100%;
+  background-color: var(--p-sky-200);
+  border-radius: 15px;
+  padding-left: 10%;
+
+  &-text {
+    color: var(--p-surface-700);
+    margin-top: 50px;
+
+    h1 {
+      margin: 0;
+      font-size: 3em;
+      font-weight: 400;
+    }
+    h2 {
+      margin: 0;
+      font-size: 2em;
+      font-weight: 300;
+    }
+  }
+
+  &-button {
+    margin-top: 18px;
+    
+  }
+  &-btn {
+    background-color: var(--p-surface-0);
+  }
+
+  &-image {
+    text-align: right;
+    padding-right: 50px;
+  }
+
+
+}

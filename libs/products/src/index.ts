@@ -6,3 +6,4 @@ export * from './lib/models/user';
 export * from './lib/services/users.service';
 export * from './lib/resolver/resolver';
 export * from './lib/components/search/search';
+export * from './lib/components/categories-banner/categories-banner';
