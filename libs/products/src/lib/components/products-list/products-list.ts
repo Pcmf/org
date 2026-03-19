@@ -22,15 +22,15 @@ export class ProductsList {
       map(params => params.get('id'))
     ));
 
-    readonly _products = toSignal(this.productsService.getAll(), {initialValue: []});
+    readonly allProducts = toSignal(this.productsService.getAll(), {initialValue: []});
+
     //filter by categories
     readonly products = computed(() => {
-      const products = this._products();
-      const anySelected = this.selectedCategories().filter(el => el?.checked);
-      if(anySelected.length > 0) {
-        return products.filter(prod => anySelected?.find(cat => cat._id ===prod.category._id));
-      }
-      return products;
+      const selecteds = this.selectedCategories().filter(el => el?.checked);
+      if(selecteds.length === 0) return this.allProducts();
+        const selectedIds = new Set(selecteds.map(c => c._id));
+        return this.allProducts().filter(prod => selectedIds.has(prod.category._id));
+
     });
 
 

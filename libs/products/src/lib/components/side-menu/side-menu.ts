@@ -19,37 +19,25 @@ export class SideMenu {
   readonly categoriesService = inject(CategoriesService);
   selectedCategoriesOut = output<Category[]>();
 
-  readonly categories = toSignal(this.categoriesService.getCategories(), {initialValue: []});
+  readonly _categories = toSignal(this.categoriesService.getCategories(), {initialValue: []});
   //filter seelected
-  // readonly categories = computed(() =>
-  //   this._categories().map(cat => ({
-  //     ...cat,
-  //     checked: cat.checked ?? false
-  //   }))
-  // );
+  readonly categories = computed(() =>
+    this._categories().map(cat => ({
+      ...cat,
+      checked: cat._id === this.paramId()
+    }))
+  );
 
   constructor() {
     effect(() => {
       const id = this.paramId();
-
-      // if(!id) return;
-      // console.log(id)
-      // const cats = this.categories().map(category => ({
-      //   ...category,
-      //   checked: category._id === id
-      // }));
-      // console.log(cats)
-      // this.selectedCategoriesOut.emit(cats);
-
-      if(id) {
-        const cats =  this.categories().map(c => {
-          if(c._id === id) {
-            c.checked = true;
-          }
-          return c;
-        })
-        this.selectedCategoriesOut.emit(cats);
-      }
+      const categories = this.categories();
+      if(!id) return;
+      const cats = categories.map(category => ({
+        ...category,
+        checked: category._id === id
+      }));
+      this.selectedCategoriesOut.emit(cats);
     })
   }
 
