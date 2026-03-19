@@ -63,18 +63,15 @@ export class ProductForm implements OnInit {
     //load categories
     categories = toSignal(this.categoriesService.getCategories(), { initialValue: [] });
     //Check if has id on url
-    productId = toSignal(this.route.paramMap.pipe(map(params => params.get('id'))));
+    product = toSignal( this.route.data.pipe( map(data => data['product'])));
 
     constructor() {
       effect(() => {
-        const id = this.productId();
-        if(id) {
-          //using resolvers on route
-          const product = this.route.snapshot.data['product'];
-          this.loadForm(product)
-          // this.getProductById(id);
+        const product = this.product();
+        if (product) {
+          this.loadForm(product);
         }
-      })
+      });
     }
 
     ngOnInit() {

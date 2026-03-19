@@ -1,0 +1,32 @@
+@use '@org/productsStyles' as style;
+
+.product-item {
+  &-wrapper {
+    background-color: var(--p-surface-200);
+    border: 1px solid var(--p-surface-300);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
+    margin-top: 85px;
+  }
+
+  .image{
+    height: 150px;
+    width: auto;
+    max-width: 90%;
+    margin-top: -85px;
+    // mix-blend-mode: multiply; //works well when background is white
+  }
+  .name {
+    margin: 10px 0;
+  }
+  .price {
+    color: style.$primary-color;
+    font-size: 1.2em;
+    margin: 0;
+  }
+  
+}

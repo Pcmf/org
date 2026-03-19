@@ -18,6 +18,18 @@ export class ProductsService {
     return this.http.get<Product>(`http://localhost:3000/api/v1/products/${id}`);
   }
 
+  getFeatured(): Observable<Product[]> {
+    return this.http.get<Product[]>(`http://localhost:3000/api/v1/products/get/featured`);
+  }
+
+  getByCategory(categoryId: string): Observable<Product[]> {
+    return this.http.get<Product[]>(`http://localhost:3000/api/v1/products/get/category/${categoryId}`);
+  }
+
+  getFeaturedByCategoryAndCount(categoryId: string, count=10): Observable<Product[]> {
+    return this.http.get<Product[]>(`http://localhost:3000/api/v1/products/get/featured/${categoryId}/${count}`);
+  }
+
   create(product: FormData): Observable<Product> {
     return this.http.post<Product>(`http://localhost:3000/api/v1/products`, product);
   }

@@ -1,59 +1,21 @@
 <div class="categories-banner">
   <h3>Categories</h3>
   <div class="categories-banner-items">
-    
-      <div class="category">
-        <div class="category-icon">
-          <i class="pi pi-check"></i>
+      @for(cat of categories(); track cat._id) {
+      <div 
+        class="category" 
+        [ngStyle]="{'backgroundColor': cat.color}"
+        [routerLink]="`/products/category/${cat._id}`"
+      >
+        <div class="category-icon" >
+          <i class="pi pi-{{cat.icon}}"></i>
         </div>
         <div class="category-name">
-          Garden
+          {{cat.name}}
         </div>
       </div>
-    
-      <div class="category">
-        <div class="category-icon">
-          <i class="pi pi-desktop"></i>
-        </div>
-        <div class="category-name">
-          Computers
-        </div>
-      </div>
-    
-      <div class="category">
-        <div class="category-icon">
-          <i class="pi pi-phone"></i>
-        </div>
-        <div class="category-name">
-          Mobiles
-        </div>
-      </div>
-    
-      <div class="category">
-        <div class="category-icon">
-        <i class="pi pi-camera"></i></div>
-        <div class="category-name">
-          Photography
-        </div>
-      </div>
-    
-      <div class="category">
-        <div class="category-icon">
-          <i class="pi pi-home"></i>
-        </div>
-        <div class="category-name">
-          House
-        </div>
-      </div>
-    
-      <div class="category">
-        <div class="category-icon">
-          <i class="pi pi-car"></i>
-        </div>
-        <div class="category-name">
-          Automobiles
-        </div>
-      </div>
+  
+    }
   </div>
 
 </div>
