@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from '../models/product';
 
@@ -10,8 +10,12 @@ export class ProductsService {
   private readonly http = inject(HttpClient);
 
 
-  getAll(): Observable<Product[]> {
-    return this.http.get<Product[]>('http://localhost:3000/api/v1/products');
+  getAll(categoryIds?: string[]): Observable<Product[]> {
+    let params = new HttpParams();
+    if(categoryIds) {
+      params = params.append('categories', categoryIds.join(','));
+    }
+    return this.http.get<Product[]>('http://localhost:3000/api/v1/products', {params});
   }
 
   getById(id: string): Observable<Product> {

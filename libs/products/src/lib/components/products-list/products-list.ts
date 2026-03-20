@@ -1,14 +1,17 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, inject, resource, signal } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ProductItem } from '../product-item/product-item';
 import { SideMenu } from '../side-menu/side-menu';
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs';
+import { firstValueFrom, map } from 'rxjs';
+import { Product } from '../../models/product';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+
 
 @Component({
     selector: 'lib-products-list',
-    imports: [ProductItem, SideMenu],
+    imports: [ProductItem, SideMenu, ProgressSpinnerModule],
     templateUrl: './products-list.html',
     styleUrl: './products-list.scss'
 })
@@ -20,16 +23,41 @@ export class ProductsList {
     readonly paramId = toSignal(this.route.paramMap.pipe(
       map(params => params.get('id'))
     ));
-
-    readonly allProducts = toSignal(this.productsService.getAll(), {initialValue: []});
-
-    //filter by categories
-    readonly products = computed(() => {
-      const selectedIds = new Set(this.selectedCategories());
-      if(selectedIds.size === 0) return this.allProducts();
-      return this.allProducts().filter(prod => selectedIds.has(prod.category._id)
-      );
+    /**
+     * Pure Signal aproach
+     * executes always when the selectedCategories changes, 
+     * cancel previous requests and handles the loading state, error state and caching
+     */
+    readonly products = resource<Product[], string[]>({
+      params: () => this.selectedCategories(),
+      loader: (loaderParams) =>
+        firstValueFrom(this.productsService.getAll(loaderParams.params))
     });
+
+    /**
+     * With RxJs
+     * Using the api to filter on BE
+     */
+    // readonly products = toSignal(
+    //   toObservable(this.selectedCategories).pipe(
+    //     debounceTime(300),
+    //     switchMap(ids => this.productsService.getAll(ids))
+    //   ),
+    //   { initialValue: [] }
+    // );
+
+    /**
+     * Loading all products and them filter on FE
+     */
+    // readonly allProducts = toSignal(this.productsService.getAll(), {initialValue: []});
+    //filter by categories
+    // readonly products = computed(() => {
+    //   return this.allProducts();
+    //   // const selectedIds = new Set(this.selectedCategories());
+    //   // if(selectedIds.size === 0) return this.allProducts();
+    //   // return this.allProducts().filter(prod => selectedIds.has(prod.category._id)
+    //   // );
+    // });
 
 
     selectedCats(ids: string []) {

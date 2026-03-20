@@ -6,8 +6,13 @@
       <lib-side-menu [paramId]="paramId()" (selectedCategoriesOut)="selectedCats($event)"></lib-side-menu>
     </div>
     <div class="col-9">
+      @if(products.isLoading()) {
+        <div class="card flex justify-center">
+            <p-progress-spinner ariaLabel="loading" />
+        </div>
+      }
       <div class="grid">
-        @for(product of products(); track product.id) {
+        @for(product of products.value(); track product.id) {
           <div class="col-3">
             <lib-product-item [product]="product"></lib-product-item>
           </div>
