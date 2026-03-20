@@ -43,15 +43,4 @@ export class SideMenu {
     this.selectedCategoriesOut.emit(selectedIds);
   }
 
-  // updateSelectedCategories() {
-  //   const selectedCats = this.categories()
-  //   .filter(c => c.checked === true);
-  //   if (selectedCats) {
-  //     console.log(selectedCats);
-  //     this.selectedCategoriesOut.emit([...selectedCats.map(e => e._id)])
-  //   } else {
-  //     this.selectedCategoriesOut.emit([''])
-  //   }
-    
-  // }
 }
