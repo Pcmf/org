@@ -5,7 +5,6 @@ import { ProductItem } from '../product-item/product-item';
 import { SideMenu } from '../side-menu/side-menu';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
-import { Category } from '../../models/category';
 
 @Component({
     selector: 'lib-products-list',
@@ -15,7 +14,7 @@ import { Category } from '../../models/category';
 })
 export class ProductsList {
     readonly productsService = inject(ProductsService);
-    readonly selectedCategories = signal<Category[]>([]);
+    readonly selectedCategories = signal<string[]>([]);
     readonly route = inject(ActivatedRoute);
 
     readonly paramId = toSignal(this.route.paramMap.pipe(
@@ -26,12 +25,16 @@ export class ProductsList {
 
     //filter by categories
     readonly products = computed(() => {
-      const selecteds = this.selectedCategories().filter(el => el?.checked);
-      if(selecteds.length === 0) return this.allProducts();
-        const selectedIds = new Set(selecteds.map(c => c._id));
-        return this.allProducts().filter(prod => selectedIds.has(prod.category._id));
-
+      const selectedIds = new Set(this.selectedCategories());
+      if(selectedIds.size === 0) return this.allProducts();
+      return this.allProducts().filter(prod =>
+        prod.category._id !== undefined && selectedIds.has(prod.category._id)
+      );
     });
 
+
+    selectedCats(ids: (string | undefined)[]) {
+      this.selectedCategories.set(ids.filter((id): id is string => !!id))
+    }
 
 }
