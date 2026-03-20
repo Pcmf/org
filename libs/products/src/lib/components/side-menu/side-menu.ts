@@ -1,15 +1,20 @@
 import { Component, inject, output, input, effect, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
+import { ButtonModule } from 'primeng/button';
+
 import { CategoriesService } from '../../services/categories';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'lib-side-menu',
   imports: [
     FormsModule,
     CheckboxModule,
-  ],
+    ButtonModule,
+    RouterLink
+],
   templateUrl: './side-menu.html',
   styleUrl: './side-menu.scss',
 })

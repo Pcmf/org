@@ -1,4 +1,4 @@
-import { Component, inject, resource, signal } from '@angular/core';
+import { Component, computed, inject, resource, signal } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ProductItem } from '../product-item/product-item';
@@ -23,6 +23,13 @@ export class ProductsList {
     readonly paramId = toSignal(this.route.paramMap.pipe(
       map(params => params.get('id'))
     ));
+
+    // constructor() {
+    //   const id = this.paramId();
+    //   if(!id) {
+    //     this.selectedCategories().toLocaleString([]);
+    //   }
+    // }
     /**
      * Pure Signal aproach
      * executes always when the selectedCategories changes, 
@@ -34,30 +41,7 @@ export class ProductsList {
         firstValueFrom(this.productsService.getAll(loaderParams.params))
     });
 
-    /**
-     * With RxJs
-     * Using the api to filter on BE
-     */
-    // readonly products = toSignal(
-    //   toObservable(this.selectedCategories).pipe(
-    //     debounceTime(300),
-    //     switchMap(ids => this.productsService.getAll(ids))
-    //   ),
-    //   { initialValue: [] }
-    // );
 
-    /**
-     * Loading all products and them filter on FE
-     */
-    // readonly allProducts = toSignal(this.productsService.getAll(), {initialValue: []});
-    //filter by categories
-    // readonly products = computed(() => {
-    //   return this.allProducts();
-    //   // const selectedIds = new Set(this.selectedCategories());
-    //   // if(selectedIds.size === 0) return this.allProducts();
-    //   // return this.allProducts().filter(prod => selectedIds.has(prod.category._id)
-    //   // );
-    // });
 
 
     selectedCats(ids: string []) {
