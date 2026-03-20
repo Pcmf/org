@@ -9,6 +9,5 @@ export * from './lib/components/search/search';
 export * from './lib/components/categories-banner/categories-banner';
 export * from './lib/components/featured-products/featured-products';
 export * from './lib/components/product-item/product-item';
-export * from './lib/components/products-list/products-list';
+export * from './lib/pages/products-list/products-list';
 export * from './lib/components/side-menu/side-menu';
-
