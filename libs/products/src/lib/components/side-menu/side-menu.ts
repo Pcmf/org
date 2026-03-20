@@ -16,7 +16,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 export class SideMenu {
   readonly paramId = input<string | null | undefined>();
   readonly categoriesService = inject(CategoriesService);
-  selectedCategoriesOut = output<(string | undefined)[]>();
+  selectedCategoriesOut = output<string[]>();
 
   readonly _categories = toSignal(this.categoriesService.getCategories(), {initialValue: []});
   //filter seelected

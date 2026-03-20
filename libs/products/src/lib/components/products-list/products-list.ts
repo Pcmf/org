@@ -27,14 +27,13 @@ export class ProductsList {
     readonly products = computed(() => {
       const selectedIds = new Set(this.selectedCategories());
       if(selectedIds.size === 0) return this.allProducts();
-      return this.allProducts().filter(prod =>
-        prod.category._id !== undefined && selectedIds.has(prod.category._id)
+      return this.allProducts().filter(prod => selectedIds.has(prod.category._id)
       );
     });
 
 
-    selectedCats(ids: (string | undefined)[]) {
-      this.selectedCategories.set(ids.filter((id): id is string => !!id))
+    selectedCats(ids: string []) {
+      this.selectedCategories.set(ids);
     }
 
 }
