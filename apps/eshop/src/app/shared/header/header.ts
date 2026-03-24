@@ -13,4 +13,5 @@ import { RouterLink } from "@angular/router";
 })
 export class Header {
   readonly cartService = inject(CartService);
+  readonly totalItems = this.cartService.totalItems;
 }

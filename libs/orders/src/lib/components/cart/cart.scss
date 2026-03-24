@@ -2,6 +2,12 @@
   min-height: 500px;
 
   .cart {
+    &-empty {
+      height: 220px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     &-item {
       background-color: var(--p-surface-0);
       border: 1px solid var(--p-surface-300);
@@ -58,5 +64,5 @@
 
   }
 
-  
+
 }

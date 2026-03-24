@@ -10,9 +10,8 @@ export class CartService {
   readonly #cart = signal<CartItem[]>([]);
   readonly cart = this.#cart.asReadonly(); //to be accessed
 
-
   readonly totalItems = computed(() => this.#cart().length);  //different products in the cart
-
+  readonly countItems = computed(() => this.#cart().reduce((acc, prod) => acc + prod.quantity, 0));
 
   constructor() {
     const localCart = localStorage.getItem(CART_KEY);
@@ -24,6 +23,7 @@ export class CartService {
       localStorage.setItem(CART_KEY, JSON.stringify(this.#cart()));
     });
   }
+  
   setCartItem(cartItem: CartItem) {
     const cartProdIds = computed(() => this.#cart().map(item => item.productId));
     if(cartProdIds().includes(cartItem.productId)){

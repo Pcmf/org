@@ -9,7 +9,7 @@
           label="Continue shopping"
           icon="pi pi-arrow-left"
           [rounded]="true"
-          (onClick)="backToShop()"
+          routerLink="/products"
         >
         </p-button>
       </div>
@@ -20,6 +20,14 @@
       <div class="cart-shipping mb-5">
         Shipping after payment, deleivery time: 2days
       </div>
+      @if(productsArr.length === 0) {
+        <div class="cart-item mb-2 cart-empty">
+          <div class="grid">
+            <h2>No items in the Cart</h2>
+          </div>
+        </div>
+
+      }
       @for(prod of productsArr; track prod.id) {
         <div class="cart-item mb-2">
           <div class="grid">

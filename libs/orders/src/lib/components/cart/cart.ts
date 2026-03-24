@@ -6,7 +6,7 @@ import { CardModule } from 'primeng/card';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ButtonModule } from 'primeng/button';
 import { OrdersService } from '../../services/orders.service';
-import { CurrencyPipe, Location } from '@angular/common';
+import { CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Product } from '../../models/product';
 import { RouterModule } from '@angular/router';
@@ -28,11 +28,10 @@ import { OrderSummary } from '../order-summary/order-summary';
   styleUrl: './cart.scss',
 })
 export class Cart {
-  readonly location = inject(Location)
   readonly cartService = inject(CartService);
   readonly ordersService = inject(OrdersService);
 
-  readonly productItemsInCart = signal(this.cartService.cart());
+  productItemsInCart = signal(this.cartService.cart());
 
   readonly products = toSignal(
     toObservable(this.productItemsInCart).pipe(
@@ -41,11 +40,11 @@ export class Cart {
         return forkJoin(
           items.map(item => {
             return this.ordersService.getProductById(item.productId).pipe(
-              map(prod => {
-                prod.quantity = item.quantity;
-                return prod;
+              map(prod => ({
+              ...prod,
+              quantity: item.quantity
               })
-            )
+            ))
           })
         );
       }),
@@ -53,19 +52,15 @@ export class Cart {
     { initialValue: [] }
   );
 
-  readonly countItems = computed(() => this.productItemsInCart().reduce((acc, prod) => acc + prod.quantity, 0));
+  readonly countItems = this.cartService.countItems;
   readonly itemsPrice = computed(() => this.products().reduce((acc, item) => acc + item.price * (item.quantity ?? 1), 0));
-  readonly packAndShippingPrice = computed(() => this.itemsPrice() > 100 ? 0 : 5);
-  readonly totalPrice = computed(() => this.itemsPrice() + this.packAndShippingPrice())
+  readonly packAndShippingPrice = computed(() => this.itemsPrice() > 0 && this.itemsPrice() < 100 ? 5 : 0);
+  readonly totalPrice = computed(() => this.itemsPrice() + this.packAndShippingPrice());
 
   updateCartItem(prod: Product){
     const productItem = {productId: prod.id, quantity: prod.quantity ?? 0};
     const resp = this.cartService.setCartItem(productItem);
     this.productItemsInCart.set(resp());
-  }
-
-  backToShop() {
-    this.location.back();
   }
 
   deleteCartItem(id: string) {

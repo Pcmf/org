@@ -13,9 +13,15 @@
     </div>
     <div class="col-1 tools flex justify-center ">
       <i class="pi pi-user"></i>
-      <p-overlaybadge [value]="cartService.totalItems()" severity="danger" routerLink="/cart">
+      @if(totalItems() > 0) {
+        <p-overlaybadge class="badge" [value]="totalItems()" severity="danger" routerLink="/cart">
+          <i class="pi pi-shopping-cart" routerLink="/cart"></i>
+        </p-overlaybadge>
+      } @else {
         <i class="pi pi-shopping-cart" routerLink="/cart"></i>
-      </p-overlaybadge>
+      }
+
+
     </div>
   </div>
 </header>
