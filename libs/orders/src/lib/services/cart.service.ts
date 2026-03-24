@@ -8,7 +8,7 @@ export const CART_KEY = 'cart';
 })
 export class CartService {
   readonly #cart = signal<CartItem[]>([]);
-  readonly cartR = this.#cart.asReadonly(); //to be accessed
+  readonly cart = this.#cart.asReadonly(); //to be accessed
 
 
   readonly totalItems = computed(() => this.#cart().length);  //different products in the cart
@@ -23,6 +23,17 @@ export class CartService {
     effect(() => {
       localStorage.setItem(CART_KEY, JSON.stringify(this.#cart()));
     });
+  }
+  setCartItem(cartItem: CartItem) {
+    const cartProdIds = computed(() => this.#cart().map(item => item.productId));
+    if(cartProdIds().includes(cartItem.productId)){
+      if(cartItem) {
+      this.#cart.update((items) => items.map(item => item.productId === cartItem.productId ? cartItem : item));
+      }
+    } else {
+      this.#cart.update((items) => [...items, cartItem]);
+    }
+    return this.cart;
   }
 
   addToCart(id: string, quantity: number) {

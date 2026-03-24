@@ -1,0 +1,33 @@
+<div class="summary">
+    <h2>Order Summary</h2>
+    <div class="grid">
+      <div class="col-8 summary-description">
+        <span>Items Price</span>
+        <span>Packing & Shipping</span>
+        <span>Total Price</span>
+      </div>
+      <div class="col-4 summary-values">
+        <span>{{itemsPrice() | currency: 'EUR'}}</span>
+          @if(packAndShippingPrice() === 0) {
+            <span class="summary-values-free">Free</span>
+          } @else {
+            <span class="summary-values-pay">{{packAndShippingPrice() | currency: 'EUR'}}</span>
+          }
+        <span>{{totalPrice() | currency: 'EUR'}}</span>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="col-12 summary-checkout">
+        <p-button
+          label="Checkout"
+          severity="success"
+          [rounded]="true"
+          class="mt-3"
+          styleClass="w-full"
+          routerLink="/checkout"
+        ></p-button>
+      </div>
+    </div>
+
+    <small class="mt-3">*Free shipping for purchase over 100€</small>
+</div>

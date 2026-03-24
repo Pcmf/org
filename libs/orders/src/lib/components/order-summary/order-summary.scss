@@ -1,0 +1,30 @@
+.summary {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--p-surface-0);
+    border: 1px solid var(--p-surface-300);
+    padding: 15px;
+    border-radius: 15px;
+    margin-top: 6em;
+    margin-bottom: 15px;
+
+    &-description, &-values {
+      display: flex;
+      flex-direction: column;
+      gap: 17px
+    }
+    &-values {
+      &-free{
+        color: var(--p-green-600);
+        font-weight: 600;
+      }
+      &-pay {
+        color: var(--p-red-600);
+        font-weight: 600px
+      }
+    }
+
+    &-checkout {
+      margin-top: 25px;
+    }
+  }

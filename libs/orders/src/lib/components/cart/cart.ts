@@ -6,23 +6,34 @@ import { CardModule } from 'primeng/card';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ButtonModule } from 'primeng/button';
 import { OrdersService } from '../../services/orders.service';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Product } from '../../models/product';
+import { RouterModule } from '@angular/router';
+import { OrderSummary } from '../order-summary/order-summary';
 
 
 @Component({
   selector: 'lib-cart',
-  imports: [CardModule, ButtonModule, CurrencyPipe, InputNumberModule, FormsModule],
+  imports: [
+    CardModule,
+    ButtonModule,
+    CurrencyPipe,
+    InputNumberModule,
+    FormsModule,
+    RouterModule,
+    OrderSummary
+  ],
   templateUrl: './cart.html',
   styleUrl: './cart.scss',
 })
 export class Cart {
+  readonly location = inject(Location)
   readonly cartService = inject(CartService);
   readonly ordersService = inject(OrdersService);
-  quantity = 0;
 
-  readonly productItemsInCart = signal(this.cartService.cartR());
-  readonly prodQtys = computed(() => Object.fromEntries(this.productItemsInCart().map((el => [el.productId, el.quantity]))))
+  readonly productItemsInCart = signal(this.cartService.cart());
+
   readonly products = toSignal(
     toObservable(this.productItemsInCart).pipe(
       switchMap(items => {
@@ -42,11 +53,28 @@ export class Cart {
     { initialValue: [] }
   );
 
+  readonly countItems = computed(() => this.productItemsInCart().reduce((acc, prod) => acc + prod.quantity, 0));
+  readonly itemsPrice = computed(() => this.products().reduce((acc, item) => acc + item.price * (item.quantity ?? 1), 0));
+  readonly packAndShippingPrice = computed(() => this.itemsPrice() > 100 ? 0 : 5);
+  readonly totalPrice = computed(() => this.itemsPrice() + this.packAndShippingPrice())
+
+  updateCartItem(prod: Product){
+    const productItem = {productId: prod.id, quantity: prod.quantity ?? 0};
+    const resp = this.cartService.setCartItem(productItem);
+    this.productItemsInCart.set(resp());
+  }
+
   backToShop() {
-    console.log('Go back to shopping')
+    this.location.back();
   }
 
   deleteCartItem(id: string) {
-    console.log('Delete item, ', id);
+    this.productItemsInCart.update((items) => items.filter(item => item.productId !== id));
+    this.cartService.removeFromCart(id);
+
+  }
+
+  doCheckout() {
+    console.log('Logout');
   }
 }

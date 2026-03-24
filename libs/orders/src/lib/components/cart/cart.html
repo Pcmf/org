@@ -8,13 +8,14 @@
         <p-button
           label="Continue shopping"
           icon="pi pi-arrow-left"
+          [rounded]="true"
           (onClick)="backToShop()"
         >
         </p-button>
       </div>
 
       <div>
-        <h4>My Cart: x items</h4>
+        <h4>My Cart: {{countItems()}} items</h4>
       </div>
       <div class="cart-shipping mb-5">
         Shipping after payment, deleivery time: 2days
@@ -33,7 +34,7 @@
                 {{prod.price | currency: 'EUR'}}
               </div>
               <div class="cart-item-remove">
-                <p-button icon="pi pi-trash" (onClick)="deleteCartItem(prod.id)"></p-button>
+                <p-button icon="pi pi-trash" [rounded]="true" severity="danger" (onClick)="deleteCartItem(prod.id)"></p-button>
               </div>
             </div>
             <div class="col-3 cart-item-quantity">
@@ -46,8 +47,9 @@
                     inputId="quantity"
                     spinnerMode="horizontal"
                     [step]="1" mode="decimal"
-                    [min]="0"
+                    [min]="1"
                     [inputSize]="3"
+                    (click)="updateCartItem(prod)"
                 >
                   <ng-template #incrementbuttonicon>
                       <span class="pi pi-plus"></span>
@@ -66,6 +68,15 @@
         </div>
       }
     </div>
+
+    <div class="col-4">
+      <lib-order-summary
+        [itemsPrice]="itemsPrice()"
+        [packAndShippingPrice]="packAndShippingPrice()"
+        [totalPrice]="totalPrice()"
+      ></lib-order-summary>
+    </div>
+
   </div>
 </div>
 
