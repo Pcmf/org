@@ -2,14 +2,22 @@
 
 <div class="product-item">
   <div class="product-item-wrapper">
-    <img [src]="prod.image" alt="prod.name" srcset="" width="100px" class="image">
-    <h4 class="name">{{prod.name}}</h4>
+    <img
+      [src]="prod.image"
+      [routerLink]="['/products', prod.id]"
+      alt="prod.name"
+      srcset=""
+      width="100px"
+      class="image"
+    >
+    <h4 class="name" [routerLink]="['/products', prod.id]">{{prod.name}}</h4>
     <h5 class="price">{{prod.price | currency: 'EUR'}}</h5>
-    <p-button 
+    <p-button
       class="mt-3"
       label="Add to cart"
       icon="pi pi-shopping-cart"
       [rounded]="true"
+      (click)="addToCart.emit(prod.id)"
     ></p-button>
   </div>
 </div>

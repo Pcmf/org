@@ -1,13 +1,14 @@
+<p-toast></p-toast>
 <div class="feature-product">
   <!-- <h1>{{category()}}</h1> -->
   <h3>Featured Products</h3>
 
   <div class="feature-product-items">
-    
+
        @if(products().length > 0) {
           @for(product of products(); track product.id) {
             <div class="col-3">
-              <lib-product-item [product]="product"></lib-product-item>
+              <lib-product-item [product]="product" (addToCart)="addToCart($event)"></lib-product-item>
           </div>
           }
         }

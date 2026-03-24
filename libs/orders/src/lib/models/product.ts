@@ -16,4 +16,5 @@ export class Product {
   isFeatured!: boolean;
   dateCreated!: Date;
   images?: string[];
+  quantity?: number;
 }

@@ -1,3 +1,4 @@
+<p-toast/>
 <div class="products-list">
   <h3>Products list</h3>
   <div class="grid">
@@ -14,7 +15,7 @@
       <div class="grid">
         @for(product of products.value(); track product.id) {
           <div class="col-3">
-            <lib-product-item [product]="product"></lib-product-item>
+            <lib-product-item [product]="product" (addToCart)="addToCart($event)"></lib-product-item>
           </div>
         }
       </div>

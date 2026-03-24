@@ -1,0 +1,73 @@
+@let productsArr = products();
+
+<div class="cart-page">
+  <div class="grid">
+    <div class="col-8">
+
+      <div class="mt-4">
+        <p-button
+          label="Continue shopping"
+          icon="pi pi-arrow-left"
+          (onClick)="backToShop()"
+        >
+        </p-button>
+      </div>
+
+      <div>
+        <h4>My Cart: x items</h4>
+      </div>
+      <div class="cart-shipping mb-5">
+        Shipping after payment, deleivery time: 2days
+      </div>
+      @for(prod of productsArr; track prod.id) {
+        <div class="cart-item mb-2">
+          <div class="grid">
+            <div class="col-2 cart-item-image">
+              <img [src]="prod.image" alt="">
+            </div>
+            <div class="col-6 cart-item-info">
+              <div class="cart-item-name">
+                {{prod.name}}
+              </div>
+              <div class="cart-item-price">
+                {{prod.price | currency: 'EUR'}}
+              </div>
+              <div class="cart-item-remove">
+                <p-button icon="pi pi-trash" (onClick)="deleteCartItem(prod.id)"></p-button>
+              </div>
+            </div>
+            <div class="col-3 cart-item-quantity">
+              <div class="product-quantity">
+                <label class="mb-2 block font-bold" for="quantity">Quantity</label>
+                <p-inputnumber
+                    [(ngModel)]="prod.quantity"
+                    [showButtons]="true"
+                    buttonLayout="horizontal"
+                    inputId="quantity"
+                    spinnerMode="horizontal"
+                    [step]="1" mode="decimal"
+                    [min]="0"
+                    [inputSize]="3"
+                >
+                  <ng-template #incrementbuttonicon>
+                      <span class="pi pi-plus"></span>
+                  </ng-template>
+                  <ng-template #decrementbuttonicon>
+                      <span class="pi pi-minus"></span>
+                  </ng-template>
+                </p-inputnumber>
+              </div>
+              <div class="cart-item-subtotal">
+                Subtotal:
+                <span class="cart-item-subtotal-value">{{prod.price * prod.quantity! | currency: 'EUR'}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+
+

@@ -46,7 +46,8 @@ export class CategoryForm {
     categoryModel = signal<Category>({
         id: '',
         name: '',
-        icon: ''
+        icon: '',
+        _id: ''
     });
 
     categoryForm = form(this.categoryModel, (fieldPath) => {
@@ -68,6 +69,7 @@ export class CategoryForm {
         this.categoriesService.getCategoryVById(id).subscribe((cat) => {
           if(!cat) return;
           this.categoryModel.set({
+            _id: cat[0]._id,
             id: cat[0]._id!,
             name: cat[0].name,
             icon: cat[0].icon
@@ -84,7 +86,7 @@ export class CategoryForm {
           this.categoriesService.updateCategory(this.categoryForm().controlValue() as Category).subscribe({
             next: () => {
                 this.showSuccess();
-                this.categoryForm().setControlValue({id: '', name: '', icon: '' });
+                this.categoryForm().setControlValue({_id: '', id: '', name: '', icon: '' });
                 timer(2000)
                     .toPromise()
                     .then(() => this.location.back());
@@ -95,7 +97,7 @@ export class CategoryForm {
           this.categoriesService.saveCategory(this.categoryForm().value()).subscribe({
               next: () => {
                   this.showSuccess();
-                  this.categoryForm().setControlValue({id: '', name: '', icon: '' });
+                  this.categoryForm().setControlValue({_id: '', id: '', name: '', icon: '' });
                   timer(2000)
                       .toPromise()
                       .then(() => this.location.back());

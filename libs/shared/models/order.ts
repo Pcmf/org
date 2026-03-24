@@ -1,4 +1,4 @@
-import { User } from "./user";
+import { User } from "../../products/src";
 import { OrderItem } from "./order-item";
 
 export interface Order {

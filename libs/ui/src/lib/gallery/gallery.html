@@ -1,0 +1,19 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+<div class="gallery">
+  <div class="main-image">
+    <img [src]="mainImage()" alt="image" />
+  </div>
+
+  <div class="gallery-images">
+    <ul>
+      @for(img of galleryImages(); track $index) {
+        <li
+          [style]="{'background-image': `url(${img})`}"
+          (click)="showOnMain(img)"
+        ></li>
+      }
+    </ul>
+
+  </div>
+</div>

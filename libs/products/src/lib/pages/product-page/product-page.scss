@@ -1,0 +1,51 @@
+.product-page {
+
+  .product {
+    &-name {
+      font-size: 2em;;
+    }
+
+    &-description {
+      font-size: 1.4em;;
+    }
+
+    &-rating {
+      margin: 15px 0;
+    }
+
+    &-price {
+      font-size: 1.5em;
+      font-weight: 600;
+      border-bottom: 1px solid var(--p-surface-300);
+      padding: 25px 0;
+      color: var(--p-surface-600);
+    }
+    .price-before {
+      font-size: .8em;
+      font-weight: 100;
+      margin-left: 10px;
+      color: var(--p-surface-400);
+      text-decoration: line-through;
+    }
+
+    &-quantity {
+      margin-top: 16px;
+    }
+    .p-inputnumber {
+      background-color: rgb(192, 241, 241) !important;
+    }
+
+    &-actions {
+      margin-top: 6px;
+      display: flex;
+      gap: 20px;
+    }
+    &-back {
+      margin-top: 40px;
+    }
+  }
+
+  .product-rich-description {
+    line-height: 1.6;
+  }
+}

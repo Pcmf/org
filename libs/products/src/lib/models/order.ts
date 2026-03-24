@@ -1,5 +1,5 @@
-import { User } from "./user";
 import { OrderItem } from "./order-item";
+import { User } from "./user";
 
 export interface Order {
   id: string;

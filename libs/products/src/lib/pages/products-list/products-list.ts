@@ -7,15 +7,21 @@ import { ActivatedRoute } from '@angular/router';
 import { firstValueFrom, map } from 'rxjs';
 import { Product } from '../../models/product';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { CartService } from '@org/orders';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
     selector: 'lib-products-list',
-    imports: [ProductItem, SideMenu, ProgressSpinnerModule],
+    imports: [ProductItem, SideMenu, ProgressSpinnerModule, ToastModule],
+    providers: [MessageService],
     templateUrl: './products-list.html',
     styleUrl: './products-list.scss'
 })
 export class ProductsList {
     readonly productsService = inject(ProductsService);
+    readonly cartService = inject(CartService);
+    readonly messageService = inject(MessageService);
     readonly selectedCategories = signal<string[]>([]);
     readonly route = inject(ActivatedRoute);
 
@@ -32,5 +38,11 @@ export class ProductsList {
 
     selectedCats(ids: string[]) {
         this.selectedCategories.set(ids);
+    }
+
+    addToCart(id: string) {
+      this.cartService.addToCart(id, 1);
+            this.messageService.add({ severity: 'success', summary: 'Add to cart', detail: 'You add a product to cart!' });
+
     }
 }

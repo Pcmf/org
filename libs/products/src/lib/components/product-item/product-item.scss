@@ -18,10 +18,12 @@
     width: auto;
     max-width: 90%;
     margin-top: -85px;
+    cursor: pointer;
     // mix-blend-mode: multiply; //works well when background is white
   }
   .name {
     margin: 10px 0;
+    cursor: pointer;
   }
   .price {
     color: style.$primary-color;
