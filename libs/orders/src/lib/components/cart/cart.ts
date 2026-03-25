@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { switchMap, of, forkJoin, map} from 'rxjs';
@@ -26,6 +26,7 @@ import { OrderSummary } from '../order-summary/order-summary';
   ],
   templateUrl: './cart.html',
   styleUrl: './cart.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Cart {
   readonly cartService = inject(CartService);
