@@ -1,9 +1,9 @@
-import { User } from "../../products/src";
+import { User } from "./user";
 import { OrderItem } from "./order-item";
 
 export interface Order {
-  id: string;
-  _id: string;
+  id?: string;
+  _id?: string;
   orderItems: OrderItem[];
   shippingAddress1: string;
   shippingAddress2: string;

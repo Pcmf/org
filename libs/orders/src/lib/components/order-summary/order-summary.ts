@@ -1,5 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
@@ -15,6 +15,7 @@ import { CartService } from '../../services/cart.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderSummary {
+  readonly isCartPage = input(false);
   readonly ordersService = inject(OrdersService);
   readonly cartService = inject(CartService);
 

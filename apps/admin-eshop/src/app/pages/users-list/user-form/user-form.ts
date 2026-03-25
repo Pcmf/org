@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, effect, inject, linkedSignal, signa
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormField, form, required } from '@angular/forms/signals';
 import { RouterModule, ActivatedRoute } from '@angular/router';
-import { UsersService, User } from '@org/products';
+import { UsersService } from '@org/products';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -20,6 +20,7 @@ import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import * as countriesLib from  'i18n-iso-countries';
 import enLocale from 'i18n-iso-countries/langs/en.json';
+import { User } from '@org/shared';
 
 
 @Component({
@@ -72,7 +73,7 @@ export class UserForm implements OnInit {
     userForm = form(this.userModel, (fieldPath) => {
         required(fieldPath.name, { message: 'This field is mandatory' });
         required(fieldPath.email, { message: 'This field is mandatory' });
-        required(fieldPath.password, {
+        required(fieldPath.password!, {
           when: () => !this.isEditing(),
           message: 'This field is mandatory'
         });

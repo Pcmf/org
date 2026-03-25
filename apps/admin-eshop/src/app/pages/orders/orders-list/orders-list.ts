@@ -5,7 +5,8 @@ import { ButtonModule} from 'primeng/button'
 import { InputTextModule } from 'primeng/inputtext';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
-import { OrdersService, Order } from '@org/orders'
+import { OrdersService } from '@org/orders';
+import { Order } from '@org/shared';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterModule } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -82,8 +83,8 @@ export class OrdersList {
     );
 
     orderStatus = ORDER_STATUS;
-  
-  
+
+
     delete(order: Order) {
       // this.ordersService.delete(order).subscribe(
       //   {
@@ -103,7 +104,7 @@ export class OrdersList {
       //   }
       // )
     }
-  
+
     confirm2(event: Order) {
       this.confirmationService.confirm({
         // target: event.target as EventTarget,
@@ -120,7 +121,7 @@ export class OrdersList {
             label: 'Delete',
             severity: 'danger'
         },
-  
+
         accept: () => {
             this.delete(event as Order)
         },
@@ -128,5 +129,5 @@ export class OrdersList {
         // }
       });
     }
-  
+
 }

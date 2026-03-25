@@ -54,7 +54,7 @@
                     type="password"
                     id="password"
                     aria-describedby="password-help"
-                    [formField]="userForm.password"
+                    [formField]="userForm.password!"
                   />
                 </div>
               </p-iftalabel>
@@ -149,9 +149,9 @@
                       [checkmark]="true"
                       placeholder="..."
                       inputId="countryLabel"
-                      [filter]="true" 
+                      [filter]="true"
                       filterBy="name"
-                      class="w-full" 
+                      class="w-full"
                   ></p-select>
 
                   <label for="countryLabel">Country</label>

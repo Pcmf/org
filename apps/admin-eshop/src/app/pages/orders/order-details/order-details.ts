@@ -3,7 +3,8 @@ import { CardModule } from 'primeng/card';
 import { FieldsetModule } from 'primeng/fieldset';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { OrdersService, Order } from '@org/orders';
+import { OrdersService } from '@org/orders';
+import { Order } from '@org/shared';
 import { ActivatedRoute } from '@angular/router';
 import { DatePipe, CurrencyPipe, Location } from '@angular/common';
 import { SelectModule } from 'primeng/select';
@@ -11,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { Table, TableModule } from 'primeng/table';
 
 export interface Status {
-  id: number; 
+  id: number;
   label: string;
 }
 
@@ -52,7 +53,9 @@ export class OrderDetails {
 
 
   onStatusChange() {
-    this.ordersService.update(this.order.id, this.order).subscribe(
+    const id = this.order.id;
+    if(!id) return;
+    this.ordersService.update(id, this.order).subscribe(
       {
         next: () => {
           this.messageService.add({
@@ -70,6 +73,6 @@ export class OrderDetails {
             detail: 'Status not updated!'
         })
       }
-    )  
+    )
   }
 }

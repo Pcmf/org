@@ -1,1 +1,154 @@
-<p>checkout works!</p>
+<p-toast/>
+<div class="page-checkout">
+  <h2>Checkout Page</h2>
+  <h3>Fill up the form and confirm to finish your order</h3>
+
+  <p-button
+          label="Back to cart"
+          severity="success"
+          [rounded]="true"
+          class="mt-3"
+          icon="pi pi-arrow-left"
+          routerLink="/cart"
+  ></p-button>
+
+  <div class="grid">
+    <div class="col-8 page-checkout-form">
+      <form>
+          <div class="grid">
+            <div class="col-4">
+              <div class="flex flex-col gap-2">
+                <p-iftalabel>
+                  <input
+                    pInputText
+                    id="username"
+                    aria-describedby="username-help"
+                    [formField]="userForm.name"
+                  />
+                  <label for="username">Name</label>
+              </p-iftalabel>
+              </div>
+            </div>
+            <div class="col-4">
+              <p-iftalabel>
+                <div class="flex flex-col gap-2">
+                  <label for="email">Email</label>
+                  <input
+                    pInputText
+                    id="email"
+                    type="email"
+                    aria-describedby="email-help"
+                    [formField]="userForm.email"
+                  />
+                </div>
+              </p-iftalabel>
+            </div>
+
+            <div class="col-4">
+              <div class="flex flex-col gap-2">
+                <p-iftalabel>
+                  <input
+                    pInputText
+                    id="phone"
+                    aria-describedby="phone-help"
+                    [formField]="userForm.phone"
+                  />
+                  <label for="phone">Phone</label>
+              </p-iftalabel>
+              </div>
+            </div>
+            <div class="col-4">
+              <p-iftalabel>
+                <div class="flex flex-col gap-2">
+                  <label for="apartment">Apartment</label>
+                  <input
+                    pInputText
+                    id="apartment"
+                    aria-describedby="apartment-help"
+                    [formField]="userForm.apartment"
+                  />
+                </div>
+              </p-iftalabel>
+            </div>
+            <div class="col-4">
+              <div class="flex flex-col gap-2">
+                <p-iftalabel>
+                  <input
+                    pInputText
+                    id="street"
+                    aria-describedby="street-help"
+                    [formField]="userForm.street"
+                  />
+                  <label for="street">Street</label>
+              </p-iftalabel>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <p-iftalabel>
+                <div class="flex flex-col gap-2">
+                  <label for="zip">Zip</label>
+                  <input
+                    pInputText
+                    id="zip"
+                    aria-describedby="zip-help"
+                    [formField]="userForm.zip"
+                  />
+                </div>
+              </p-iftalabel>
+            </div>
+            <div class="col-4">
+              <div class="flex flex-col gap-2">
+                <p-iftalabel>
+                  <input
+                    pInputText
+                    id="city"
+                    aria-describedby="city-help"
+                    [formField]="userForm.city"
+                  />
+                  <label for="city">City</label>
+              </p-iftalabel>
+              </div>
+            </div>
+            <div class="col-3">
+                <div class="flex flex-col gap-2">
+                  <p-iftalabel class="w-full">
+
+                  <p-select
+                      [ngModel]="userForm.country"
+                      [ngModelOptions]="{standalone: true}"
+                      (onChange)="userForm.country().value.set($event.value)"
+                      [options]="countries"
+                      optionLabel="name"
+                      optionValue="id"
+                      [checkmark]="true"
+                      placeholder="..."
+                      inputId="countryLabel"
+                      [filter]="true"
+                      filterBy="name"
+                      class="w-full"
+                  ></p-select>
+
+                  <label for="countryLabel">Country</label>
+                  </p-iftalabel>
+                </div>
+            </div>
+            <div class="col-12 mt-4">
+              <p-button
+                label="Confirm and place the order"
+                severity="success"
+                [rounded]="true"
+                class="mt-4"
+                (onClick)="submit()"
+              ></p-button>
+            </div>
+          </div>
+
+
+      </form>
+    </div>
+    <div class="col-4 page-checkout-ordersummary">
+      <lib-order-summary></lib-order-summary>
+    </div>
+  </div>
+</div>

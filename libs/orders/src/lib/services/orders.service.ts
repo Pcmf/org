@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Order } from '../models/order';
+import { Order } from '@org/shared';
 import { Product } from '../models/product';
 
 
@@ -26,6 +26,10 @@ export class OrdersService {
 
     getByUserId(userId: string): Observable<Order[]> {
         return this.http.get<Order[]>(`http://localhost:3000/api/v1/orders/userorders/${userId}`);
+    }
+
+    insertOrder(order: Order): Observable<Order> {
+      return this.http.post<Order>(`http://localhost:3000/api/v1/orders`, order);
     }
 
     update(id: string, order: Order): Observable<Order> {

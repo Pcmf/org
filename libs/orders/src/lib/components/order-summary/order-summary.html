@@ -18,18 +18,19 @@
         <span>{{totalPrice() | currency: 'EUR'}}</span>
       </div>
     </div>
-    <div class="grid">
-      <div class="col-12 summary-checkout">
-        <p-button
-          label="Checkout"
-          severity="success"
-          [rounded]="true"
-          class="mt-3"
-          styleClass="w-full"
-          routerLink="/checkout"
-        ></p-button>
+    @if(isCartPage()) {
+      <div class="grid">
+        <div class="col-12 summary-checkout">
+          <p-button
+            label="Checkout"
+            severity="success"
+            [rounded]="true"
+            class="mt-3"
+            styleClass="w-full"
+            routerLink="/checkout"
+          ></p-button>
+        </div>
       </div>
-    </div>
-
+    }
     <small class="mt-3">*Free shipping for purchase over 100€</small>
 </div>
