@@ -31,45 +31,34 @@ export class Cart {
   readonly cartService = inject(CartService);
   readonly ordersService = inject(OrdersService);
 
-  productItemsInCart = signal(this.cartService.cart());
+  readonly countItems = this.cartService.countItems;
 
   readonly products = toSignal(
-    toObservable(this.productItemsInCart).pipe(
+    toObservable(this.cartService.cart).pipe(
       switchMap(items => {
         if (!items.length) return of([]);
         return forkJoin(
-          items.map(item => {
-            return this.ordersService.getProductById(item.productId).pipe(
+          items.map(item => this.ordersService.getProductById(item.productId).pipe(
               map(prod => ({
               ...prod,
               quantity: item.quantity
               })
             ))
-          })
+          )
         );
       }),
     ),
     { initialValue: [] }
   );
 
-  readonly countItems = this.cartService.countItems;
-  readonly itemsPrice = computed(() => this.products().reduce((acc, item) => acc + item.price * (item.quantity ?? 1), 0));
-  readonly packAndShippingPrice = computed(() => this.itemsPrice() > 0 && this.itemsPrice() < 100 ? 5 : 0);
-  readonly totalPrice = computed(() => this.itemsPrice() + this.packAndShippingPrice());
-
   updateCartItem(prod: Product){
     const productItem = {productId: prod.id, quantity: prod.quantity ?? 0};
-    const resp = this.cartService.setCartItem(productItem);
-    this.productItemsInCart.set(resp());
+    this.cartService.setCartItem(productItem);
   }
 
   deleteCartItem(id: string) {
-    this.productItemsInCart.update((items) => items.filter(item => item.productId !== id));
     this.cartService.removeFromCart(id);
 
   }
 
-  doCheckout() {
-    console.log('Logout');
-  }
 }
