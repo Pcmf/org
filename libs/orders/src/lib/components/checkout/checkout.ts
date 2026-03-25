@@ -5,17 +5,15 @@ import { FormField, form, required } from '@angular/forms/signals';
 import { SelectModule } from 'primeng/select';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
-import { User } from '@org/shared';
+import { User, Order, OrderItem  } from '@org/shared';
 import { ButtonModule } from 'primeng/button';
-import { Router } from '@angular/router';
 import * as countriesLib from 'i18n-iso-countries';
 import enLocale from 'i18n-iso-countries/langs/en.json';
-import { Order } from '@org/shared';
 import { CartService } from '../../services/cart.service';
-import { OrderItem } from '../../models/order-item';
 import { OrdersService } from '../../services/orders.service';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
     selector: 'lib-checkout',
@@ -28,6 +26,7 @@ import { MessageService } from 'primeng/api';
       InputTextModule,
       ButtonModule,
       ToastModule,
+      RouterModule
     ],
     providers: [
       MessageService
@@ -44,11 +43,11 @@ export class Checkout implements OnInit {
 
     countries: { id: string; name: string }[] = [];
     userModel = signal<User>({
-        id: '',
+        // id: '',
+        // _id: '',
         name: '',
         email: '',
         isAdmin: false,
-        _id: '',
         phone: '',
         apartment: '',
         street: '',
@@ -108,8 +107,6 @@ export class Checkout implements OnInit {
 
     private getCartItems(): OrderItem[] {
         return this.cartService.cart().map((item) => ({
-            // id: '',
-            // _id:'',
             productid: item.productId,
             quantity: item.quantity
         }));
