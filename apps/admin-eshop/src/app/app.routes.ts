@@ -37,10 +37,6 @@ export const appRoutes: Route[] = [
             product: productResolver
           }
       },
-      // {
-      //   path: 'products/form/:id',
-      //   component: ProductForm
-      // },
       {
         path: 'categories',
         component: CategoriesList

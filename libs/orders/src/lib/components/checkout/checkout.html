@@ -24,6 +24,7 @@
                     id="username"
                     aria-describedby="username-help"
                     [formField]="userForm.name"
+                    [class.p-invalid]="userForm.name().invalid() && userForm.name().touched()"
                   />
                   <label for="username">Name</label>
               </p-iftalabel>
@@ -39,6 +40,7 @@
                     type="email"
                     aria-describedby="email-help"
                     [formField]="userForm.email"
+                    [class.p-invalid]="userForm.email().invalid() && userForm.email().touched()"
                   />
                 </div>
               </p-iftalabel>
@@ -52,6 +54,7 @@
                     id="phone"
                     aria-describedby="phone-help"
                     [formField]="userForm.phone"
+                    [class.p-invalid]="userForm.phone().invalid() && userForm.phone().touched()"
                   />
                   <label for="phone">Phone</label>
               </p-iftalabel>
@@ -66,6 +69,7 @@
                     id="apartment"
                     aria-describedby="apartment-help"
                     [formField]="userForm.apartment"
+                    [class.p-invalid]="userForm.apartment().invalid() && userForm.apartment().touched()"
                   />
                 </div>
               </p-iftalabel>
@@ -78,6 +82,7 @@
                     id="street"
                     aria-describedby="street-help"
                     [formField]="userForm.street"
+                    [class.p-invalid]="userForm.street().invalid() && userForm.street().touched()"
                   />
                   <label for="street">Street</label>
               </p-iftalabel>
@@ -93,6 +98,7 @@
                     id="zip"
                     aria-describedby="zip-help"
                     [formField]="userForm.zip"
+                    [class.p-invalid]="userForm.zip().invalid() && userForm.zip().touched()"
                   />
                 </div>
               </p-iftalabel>
@@ -105,6 +111,7 @@
                     id="city"
                     aria-describedby="city-help"
                     [formField]="userForm.city"
+                    [class.p-invalid]="userForm.city().invalid() && userForm.city().touched()"
                   />
                   <label for="city">City</label>
               </p-iftalabel>
@@ -139,6 +146,7 @@
                 severity="success"
                 [rounded]="true"
                 class="mt-4"
+                [disabled]="userForm().invalid()"
                 (onClick)="submit()"
               ></p-button>
             </div>

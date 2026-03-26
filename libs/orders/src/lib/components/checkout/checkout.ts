@@ -43,8 +43,6 @@ export class Checkout implements OnInit {
 
     countries: { id: string; name: string }[] = [];
     userModel = signal<User>({
-        // id: '',
-        // _id: '',
         name: '',
         email: '',
         isAdmin: false,
@@ -54,7 +52,6 @@ export class Checkout implements OnInit {
         zip: '',
         city: '',
         country: '',
-        password: ''
     });
 
     userForm = form(this.userModel, (fieldPath) => {
