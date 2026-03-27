@@ -2,8 +2,9 @@ import { CurrencyPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { OrdersService } from '@org/orders';
-import { ProductsService, UsersService } from '@org/products';
+import { ProductsService } from '@org/products';
 import { CardModule } from 'primeng/card';
+import { UsersService } from '@org/users';
 
 @Component({
   selector: 'admin-dashboard',

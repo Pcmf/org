@@ -14,11 +14,6 @@ export class AuthGuard implements CanActivate{
     if(token) {
       const tokenDecoded = JSON.parse(atob(token.split('.')[1]));
       if(tokenDecoded.isAdmin && !this._tokenExpired(tokenDecoded.exp)) {
-        console.log('Route,', state.url)
-        if(state.url) {
-          // this.router.navigate([`${state.url}`]);
-          console.log(`State: ${state.url}`)
-        }
         return true;
       }
     }

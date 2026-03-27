@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, effect, inject, linkedSignal, signa
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormField, form, required } from '@angular/forms/signals';
 import { RouterModule, ActivatedRoute } from '@angular/router';
-import { UsersService } from '@org/products';
+import { UsersService } from '@org/users';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';

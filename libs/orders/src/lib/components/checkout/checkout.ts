@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal, effect } from '@angular/core';
 import { OrderSummary } from '../order-summary/order-summary';
 import { IftaLabelModule } from 'primeng/iftalabel';
 import { FormField, form, required } from '@angular/forms/signals';
@@ -14,6 +14,7 @@ import { OrdersService } from '../../services/orders.service';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { Router, RouterModule } from '@angular/router';
+import { UserStore } from '@org/users';
 
 @Component({
     selector: 'lib-checkout',
@@ -38,6 +39,7 @@ import { Router, RouterModule } from '@angular/router';
 export class Checkout implements OnInit {
     readonly cartService = inject(CartService);
     readonly ordersService = inject(OrdersService);
+    readonly userStore = inject(UserStore);
     readonly messageService = inject(MessageService);
     readonly router = inject(Router);
 
@@ -65,8 +67,20 @@ export class Checkout implements OnInit {
         required(fieldPath.country, { message: 'This field is mandatory' });
     });
 
+
     ngOnInit() {
         this._getCountries();
+        const user = this.userStore.user();
+        if(user) {
+          this.userForm.name().value.set(user.name);
+          this.userForm.email().value.set(user.email);
+          this.userForm.phone().value.set(user.phone);
+          this.userForm.apartment().value.set(user.apartment);
+          this.userForm.street().value.set(user.street);
+          this.userForm.zip().value.set(user.zip);
+          this.userForm.city().value.set(user.city);
+          this.userForm.country().value.set(user.country);
+        }
     }
 
     submit() {

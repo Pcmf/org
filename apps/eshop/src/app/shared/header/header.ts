@@ -4,6 +4,7 @@ import { Nav } from '../nav/nav';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
 import { CartService } from '@org/orders';
 import { RouterLink } from "@angular/router";
+import { UserStore } from '@org/users';
 
 @Component({
   selector: 'app-header',
@@ -14,4 +15,5 @@ import { RouterLink } from "@angular/router";
 export class Header {
   readonly cartService = inject(CartService);
   readonly totalItems = this.cartService.totalItems;
+  readonly userStore = inject(UserStore);
 }

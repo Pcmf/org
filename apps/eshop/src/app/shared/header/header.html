@@ -12,7 +12,12 @@
       <app-nav></app-nav>
     </div>
     <div class="col-1 tools flex justify-center ">
-      <i class="pi pi-user"></i>
+      @if(userStore.isLogged()) {
+        <i class="pi pi-user-plus"></i>
+      } @else {
+        <i class="pi pi-user"></i>
+      }
+
       @if(totalItems() > 0) {
         <p-overlaybadge class="badge" [value]="totalItems()" severity="danger" routerLink="/cart">
           <i class="pi pi-shopping-cart" routerLink="/cart"></i>

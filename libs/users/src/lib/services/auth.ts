@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { User } from '@org/shared';
 
 export interface LoginUser {
-  user: string;
+  user: User;
   token: string;
 };
 

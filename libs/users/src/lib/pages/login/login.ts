@@ -7,6 +7,8 @@ import { Auth, LoginUser } from '../../services/auth';
 import { CommonModule } from '@angular/common';
 import { Localstorage } from '../../services/localstorage';
 import { Router } from '@angular/router';
+import { UserStore } from '../../state/user-store';
+import { UsersService } from '../../services/users.service';
 
 
 
@@ -27,7 +29,9 @@ import { Router } from '@angular/router';
 })
 export class Login implements OnInit{
   readonly authServices = inject(Auth);
+  readonly userService = inject(UsersService);
   readonly localstorageService = inject(Localstorage);
+  readonly userStore = inject(UserStore);
   readonly router = inject(Router);
   isSubmiting = false;
   errorLogin = false;
@@ -49,13 +53,16 @@ export class Login implements OnInit{
   onSubmit(ev: Event) {
     ev.preventDefault();
     this.isSubmiting = true;
-    this.authServices.login(this.loginForm['email'].value, this.loginForm['password'].value).subscribe(
+    const email = this.loginForm['email'].value;
+    const password = this.loginForm['password'].value;
+    this.authServices.login(email, password ).subscribe(
       {
         next: (user) => {
           this.user = user;
           this.errorLogin = false;
-          console.log(this.user)
+          console.log('Login page',this.user)
           this.localstorageService.setToken(user.token);
+          this.userStore.setUser(user.user);
           this.router.navigate(['/']);
         },
         error: (error) => {

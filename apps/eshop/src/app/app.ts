@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Header } from './shared/header/header';
 import { Footer } from './shared/footer/footer';
+import { UserStore } from '@org/users';
 
 @Component({
   imports: [RouterModule, Header, Footer],
@@ -11,4 +12,13 @@ import { Footer } from './shared/footer/footer';
 })
 export class App {
   protected title = 'eshop';
+  readonly userStore = inject(UserStore);
+
+  constructor() {
+    const user = localStorage.getItem('user');
+    if(user) {
+      this.userStore.setUser(JSON.parse(user));
+    }
+  }
+
 }

@@ -9,4 +9,5 @@ import { RouterModule } from '@angular/router';
 })
 export class App {
     protected title = 'admin-eshop';
+
 }
