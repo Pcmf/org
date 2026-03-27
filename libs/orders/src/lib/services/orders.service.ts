@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Order } from '@org/shared';
+import { Order, OrderItem } from '@org/shared';
 import { Product } from '../models/product';
 
 
@@ -42,5 +42,9 @@ export class OrdersService {
 
     totalSales(): Observable<{ totalSales: number }> {
         return this.http.get<{ totalSales: number }>(`http://localhost:3000/api/v1/orders/get/totalsales`);
+    }
+
+    payment(orderItems: OrderItem[]) {
+      return this.http.post('http://localhost:3000/api/v1/orders/payment', orderItems);
     }
 }

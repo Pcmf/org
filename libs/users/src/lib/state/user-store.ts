@@ -20,5 +20,7 @@ export class UserStore {
   }
   logOff() {
     this.#user.set(null);
+    localStorage.removeItem('user');
+    localStorage.removeItem('jwtToken');
   }
 }

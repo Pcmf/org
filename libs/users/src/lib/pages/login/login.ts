@@ -60,7 +60,6 @@ export class Login implements OnInit{
         next: (user) => {
           this.user = user;
           this.errorLogin = false;
-          console.log('Login page',this.user)
           this.localstorageService.setToken(user.token);
           this.userStore.setUser(user.user);
           this.router.navigate(['/']);

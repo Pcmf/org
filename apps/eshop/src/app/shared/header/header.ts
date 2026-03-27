@@ -16,4 +16,8 @@ export class Header {
   readonly cartService = inject(CartService);
   readonly totalItems = this.cartService.totalItems;
   readonly userStore = inject(UserStore);
+
+  logout() {
+    this.userStore.logOff();
+  }
 }

@@ -100,11 +100,13 @@ export class Checkout implements OnInit {
             totalPrice: 0,
             dateOrdered: new Date()
         };
-        this.ordersService.insertOrder(order).subscribe({
+        this.ordersService.payment(order.orderItems).subscribe({
+        // this.ordersService.insertOrder(order).subscribe({
         next: (newOrder) => {
+          this.ordersService.insertOrder(order).subscribe();
           this.cartService.clearCart();
           this.messageService.add(
-            {severity:'success', summary: 'Order placed',detail: 'Order placed successufuly with id: ' + newOrder.id}
+            {severity:'success', summary: 'Order placed',detail: 'Order placed successufuly with id: ' + newOrder}
           )
           setTimeout(() => {this.router.navigate(['/thanks'])}, 1000);
         },
