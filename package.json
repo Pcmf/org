@@ -2,7 +2,11 @@
   "name": "@org/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "lint-eshop": "nx lint eshop",
+    "lint-admin": "nx lint admin-eshop",
+    "lint": "nx run-many --target=lint --all"
+  },
   "private": true,
   "dependencies": {
     "@angular/cdk": "^21.2.1",
@@ -13,6 +17,7 @@
     "@angular/platform-browser": "~21.1.0",
     "@angular/router": "~21.1.0",
     "@primeuix/themes": "^2.0.3",
+    "@stripe/stripe-js": "^9.0.0",
     "animate.css": "^4.1.1",
     "i18n-iso-countries": "^7.14.0",
     "primeflex": "^4.0.0",

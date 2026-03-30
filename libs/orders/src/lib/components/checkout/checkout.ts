@@ -15,6 +15,9 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { Router, RouterModule } from '@angular/router';
 import { UserStore } from '@org/users';
+import { catchError, EMPTY, from, switchMap, tap } from 'rxjs';
+import { loadStripe, Stripe } from '@stripe/stripe-js';
+import { StripeService } from '../../services/stripe-service';
 
 @Component({
     selector: 'lib-checkout',
@@ -42,6 +45,7 @@ export class Checkout implements OnInit {
     readonly userStore = inject(UserStore);
     readonly messageService = inject(MessageService);
     readonly router = inject(Router);
+    readonly stripeService = inject(StripeService);
 
     countries: { id: string; name: string }[] = [];
     userModel = signal<User>({
@@ -84,12 +88,32 @@ export class Checkout implements OnInit {
     }
 
     submit() {
-        if (this.userForm().invalid()) return;
-        //procced
-        const form = this.userForm().controlValue();
-        const order: Order = {
-            orderItems: this.getCartItems(),
-            user: this._getUser(),
+      if(this.userForm().invalid()) return;
+      const user = this._getUser();
+      const orderItems = this.getCartItems();
+      const order: Order = this.createOrder(user, orderItems);
+      this.ordersService.createCheckoutSession(order.orderItems).pipe(
+        tap((session: any) => {
+          if (!session.url) {
+            throw new Error('No checkout URL returned');
+          }
+          this.ordersService.cacheOrderData(order);
+          window.location.href = session.url;
+        }),
+        catchError(err => {
+          console.error('Checkout error:', err);
+          return EMPTY;
+        })
+      ).subscribe();
+
+    }
+
+
+    private createOrder(user: User, orderItems: OrderItem[]) {
+      const form = this.userForm().controlValue();
+      return {
+            orderItems,
+            user,
             shippingAddress1: form.street,
             shippingAddress2: form.apartment,
             city: form.city,
@@ -99,23 +123,7 @@ export class Checkout implements OnInit {
             status: '',
             totalPrice: 0,
             dateOrdered: new Date()
-        };
-        this.ordersService.payment(order.orderItems).subscribe({
-        // this.ordersService.insertOrder(order).subscribe({
-        next: (newOrder) => {
-          this.ordersService.insertOrder(order).subscribe();
-          this.cartService.clearCart();
-          this.messageService.add(
-            {severity:'success', summary: 'Order placed',detail: 'Order placed successufuly with id: ' + newOrder}
-          )
-          setTimeout(() => {this.router.navigate(['/thanks'])}, 1000);
-        },
-        error: (err) => {
-          this.messageService.add(
-            {severity:'warn', summary: 'Error', detail: err.error}
-          )
         }
-      });
     }
 
     private getCartItems(): OrderItem[] {

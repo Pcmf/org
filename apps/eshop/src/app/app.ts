@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { Header } from './shared/header/header';
 import { Footer } from './shared/footer/footer';
 import { UserStore } from '@org/users';
+import { StripeService } from '@org/orders';
 
 @Component({
   imports: [RouterModule, Header, Footer],
@@ -13,12 +14,14 @@ import { UserStore } from '@org/users';
 export class App {
   protected title = 'eshop';
   readonly userStore = inject(UserStore);
+  readonly stripeService = inject(StripeService);
 
   constructor() {
     const user = localStorage.getItem('user');
     if(user) {
       this.userStore.setUser(JSON.parse(user));
     }
+    this.stripeService.init();
   }
 
 }

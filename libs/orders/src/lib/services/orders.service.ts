@@ -44,7 +44,17 @@ export class OrdersService {
         return this.http.get<{ totalSales: number }>(`http://localhost:3000/api/v1/orders/get/totalsales`);
     }
 
-    payment(orderItems: OrderItem[]) {
-      return this.http.post('http://localhost:3000/api/v1/orders/payment', orderItems);
+    createCheckoutSession(orderItems: OrderItem[]) {
+      return this.http.post('http://localhost:3000/api/v1/orders/create-checkout-session', orderItems);
     }
+
+    cacheOrderData(order: Order | null): void {
+      localStorage.setItem('pendingOrder', JSON.stringify(order));
+    }
+
+    getCachedOrderData(): Order | null {
+      const data = localStorage.getItem('pendingOrder');
+      return data ? JSON.parse(data) : null;
+    }
+
 }
