@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DatePipe, CurrencyPipe, Location } from '@angular/common';
 import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
-import { Table, TableModule } from 'primeng/table';
+import { TableModule } from 'primeng/table';
 
 export interface Status {
   id: number;

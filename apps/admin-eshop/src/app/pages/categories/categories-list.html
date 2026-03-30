@@ -37,7 +37,7 @@
                         <td>{{ category.name }}</td>
                         <td><span class="{{`pi pi-${category.icon}`}}"></span></td>
                         <td><button pButton severity="info" [routerLink]="['form', category._id]"><i class="pi pi-pencil" pButtonIcon></i></button></td>
-                        <td><i class="pi pi-trash" style="color: rgb(213, 37, 37)" (click)="confirm2(category)"></i></td>
+                        <td><i class="pi pi-trash" style="color: rgb(213, 37, 37)" (onClick)="confirm2(category)"></i></td>
                       </tr>
                 </ng-template>
             </p-table>

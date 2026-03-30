@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router'
-import { Localstorage } from 'libs/users/src/lib/services/localstorage';
+import { LocalstorageService } from '@org/users';
 
 @Component({
   selector: 'admin-sidebar',
@@ -8,7 +8,7 @@ import { Localstorage } from 'libs/users/src/lib/services/localstorage';
   templateUrl: './sidebar.html',
 })
 export class Sidebar {
-  readonly localstorgeService = inject(Localstorage);
+  readonly localstorgeService = inject(LocalstorageService);
 
   logout() {
     this.localstorgeService.removeToken();

@@ -80,7 +80,7 @@ export class UserForm implements OnInit {
     });
 
     userId = toSignal(this.route.paramMap.pipe(map((params) => params.get('id'))));
-    isEditing = linkedSignal(() => this.userId()!);
+    isEditing = linkedSignal(() => !!this.userId());
 
     constructor() {
         effect(() => {

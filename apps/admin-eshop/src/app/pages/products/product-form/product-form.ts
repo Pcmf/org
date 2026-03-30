@@ -1,6 +1,6 @@
 import { CommonModule, Location } from '@angular/common';
 import { ChangeDetectionStrategy, Component, effect, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -76,7 +76,7 @@ export class ProductForm implements OnInit {
 
     ngOnInit() {
         this._initForm();
-        
+
     }
 
     submit() {
@@ -126,19 +126,9 @@ export class ProductForm implements OnInit {
     }
 
     private loadForm(product: Product) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       Object.keys(product).map((key) => this.productForm[key]?.patchValue((product as any)[key]));
-      //Replace by the above
-      // this.productForm['id'].setValue(product.id);
-      // this.productForm['name'].setValue(product.name);
-      // this.productForm['brand'].setValue(product.brand);
-      // this.productForm['price'].setValue(product.price);
-      // this.productForm['countInStock'].setValue(product.countInStock);
-      // this.productForm['brand'].setValue(product.brand);
       this.productForm['category'].setValue(product.category._id);
-      // this.productForm['isFeatured'].setValue(product.isFeatured);
-      // this.productForm['description'].setValue(product.description);
-      // this.productForm['richDescription'].setValue(product.richDescription);
-      // this.productForm['image'].setValue(product.image);
       this.image = product.image;
     }
 
