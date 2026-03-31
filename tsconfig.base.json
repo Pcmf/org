@@ -22,7 +22,8 @@
             "@org/orders": ["libs/orders/src/index.ts"],
             "@org/shop": ["styles/eshop.scss"],
             "@org/productsStyles": ["styles/products.scss"],
-            "@org/shared": ["libs/shared/index.ts"]
+            "@org/shared": ["libs/shared/index.ts"],
+            "@org/environments": ["environments/environments.ts"]
         }
     },
     "exclude": ["node_modules", "tmp"]

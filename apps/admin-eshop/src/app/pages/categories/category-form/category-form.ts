@@ -66,7 +66,7 @@ export class CategoryForm {
     }
 
     loadCategoryById(id: string) {
-        this.categoriesService.getCategoryVById(id).subscribe((cat) => {
+        this.categoriesService.getCategoryById(id).subscribe((cat) => {
           if(!cat) return;
           this.categoryModel.set({
             _id: cat[0]._id,

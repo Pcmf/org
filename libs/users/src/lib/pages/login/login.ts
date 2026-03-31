@@ -5,7 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Auth, LoginUser } from '../../services/auth';
 import { CommonModule } from '@angular/common';
-import { Localstorage } from '../../services/localstorage';
+import { LocalstorageService } from '../../services/localstorage';
 import { Router } from '@angular/router';
 import { UserStore } from '../../state/user-store';
 import { UsersService } from '../../services/users.service';
@@ -30,7 +30,7 @@ import { UsersService } from '../../services/users.service';
 export class Login implements OnInit{
   readonly authServices = inject(Auth);
   readonly userService = inject(UsersService);
-  readonly localstorageService = inject(Localstorage);
+  readonly localstorageService = inject(LocalstorageService);
   readonly userStore = inject(UserStore);
   readonly router = inject(Router);
   isSubmiting = false;

@@ -1,13 +1,13 @@
 import { inject, Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, GuardResult, MaybeAsync, Router, RouterStateSnapshot } from '@angular/router';
-import { Localstorage } from './localstorage';
+import { LocalstorageService } from './localstorage';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate{
   readonly router = inject(Router);
-  readonly localstorageService = inject(Localstorage);
+  readonly localstorageService = inject(LocalstorageService);
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult> {
     const token = this.localstorageService.getToken();

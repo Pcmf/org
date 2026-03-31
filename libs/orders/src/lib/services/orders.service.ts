@@ -5,47 +5,49 @@ import { Product } from '../models/product';
 
 
 import { Observable } from 'rxjs';
+import { environment } from '@org/environments';
 
 @Injectable({
     providedIn: 'root'
 })
 export class OrdersService {
     readonly http = inject(HttpClient);
+    readonly apiUrl = environment.apiUrl;
 
     getAll(): Observable<Order[]> {
-        return this.http.get<Order[]>(`http://localhost:3000/api/v1/orders`);
+        return this.http.get<Order[]>(`${this.apiUrl}orders`);
     }
 
     getById(id: string): Observable<Order> {
-        return this.http.get<Order>(`http://localhost:3000/api/v1/orders/${id}`);
+        return this.http.get<Order>(`${this.apiUrl}orders/${id}`);
     }
 
     getProductById(id: string): Observable<Product> {
-        return this.http.get<Product>(`http://localhost:3000/api/v1/products/${id}`);
+        return this.http.get<Product>(`${this.apiUrl}products/${id}`);
       }
 
     getByUserId(userId: string): Observable<Order[]> {
-        return this.http.get<Order[]>(`http://localhost:3000/api/v1/orders/userorders/${userId}`);
+        return this.http.get<Order[]>(`${this.apiUrl}orders/userorders/${userId}`);
     }
 
     insertOrder(order: Order): Observable<Order> {
-      return this.http.post<Order>(`http://localhost:3000/api/v1/orders`, order);
+      return this.http.post<Order>(`${this.apiUrl}orders`, order);
     }
 
     update(id: string, order: Order): Observable<Order> {
-        return this.http.put<Order>(`http://localhost:3000/api/v1/orders/${id}`, order);
+        return this.http.put<Order>(`${this.apiUrl}orders/${id}`, order);
     }
 
     ordersCount(): Observable<{ count: number }> {
-        return this.http.get<{ count: number }>(`http://localhost:3000/api/v1/orders/get/count`);
+        return this.http.get<{ count: number }>(`${this.apiUrl}orders/get/count`);
     }
 
     totalSales(): Observable<{ totalSales: number }> {
-        return this.http.get<{ totalSales: number }>(`http://localhost:3000/api/v1/orders/get/totalsales`);
+        return this.http.get<{ totalSales: number }>(`${this.apiUrl}orders/get/totalsales`);
     }
 
     createCheckoutSession(orderItems: OrderItem[]) {
-      return this.http.post('http://localhost:3000/api/v1/orders/create-checkout-session', orderItems);
+      return this.http.post(`${this.apiUrl}orders/create-checkout-session`, orderItems);
     }
 
     cacheOrderData(order: Order | null): void {

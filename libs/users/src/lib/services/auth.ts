@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '@org/shared';
+import { environment } from '@org/environments';
 
 export interface LoginUser {
   user: User;
@@ -13,8 +14,9 @@ export interface LoginUser {
 })
 export class Auth {
   readonly http = inject(HttpClient);
+  readonly apiUrl = environment.apiUrl;
 
-  apiUrlAuth = 'http://localhost:3000/api/v1/users';
+  apiUrlAuth = `${this.apiUrl}/users`;
 
   login(email: string, password: string): Observable<LoginUser> {
     return this.http.post<LoginUser>(`${this.apiUrlAuth}/login`, { email, password});
